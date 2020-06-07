@@ -3,9 +3,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
+
 import {
-  AppAside,
-  AppFooter,
+  // AppAside,
   AppHeader,
   AppSidebar,
   AppSidebarFooter,
@@ -16,13 +16,12 @@ import {
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+import navigation from '../../sidebar';
 // routes config
 import routes from '../../routes';
 
-const DefaultAside = React.lazy(() => import('./DefaultAside'));
-const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
+// const Login = React.lazy(()=> import('../../views/Pages/Login/Login'));
 
 class DefaultLayout extends Component {
 
@@ -30,15 +29,18 @@ class DefaultLayout extends Component {
 
   signOut(e) {
     e.preventDefault()
-    this.props.history.push('/login')
+    localStorage.removeItem('Demo');
+    // eslint-disable-next-line no-unused-expressions
+    // <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+    this.props.history.push('/')
   }
 
   render() {
     return (
       <div className="app">
         <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+          <Suspense fallback={this.loading()}>
+            <DefaultHeader onLogout={e => this.signOut(e)} />
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -46,13 +48,13 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
+              <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
+            <AppBreadcrumb appRoutes={routes} router={router} />
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
@@ -68,22 +70,17 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/" to="/inicio" />
                 </Switch>
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
+          {/* <AppAside fixed>
             <Suspense fallback={this.loading()}>
               <DefaultAside />
             </Suspense>
-          </AppAside>
+          </AppAside> */}
         </div>
-        <AppFooter>
-          <Suspense fallback={this.loading()}>
-            <DefaultFooter />
-          </Suspense>
-        </AppFooter>
       </div>
     );
   }

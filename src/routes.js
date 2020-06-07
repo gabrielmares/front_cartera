@@ -1,11 +1,15 @@
 import React from 'react';
+// import Login from ;
+// import { Redirect, Route } from 'react-router-dom';
+// import Alumnos from './views/social/alumnos';
+// import Universidades from './views/social/universidades';]
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
 const Carousels = React.lazy(() => import('./views/Base/Carousels'));
 const Collapses = React.lazy(() => import('./views/Base/Collapses'));
 const Dropdowns = React.lazy(() => import('./views/Base/Dropdowns'));
-const Forms = React.lazy(() => import('./views/Base/Forms'));
+// const Logi = React.lazy(() => import('./views/Base/Forms'));
 const Jumbotrons = React.lazy(() => import('./views/Base/Jumbotrons'));
 const ListGroups = React.lazy(() => import('./views/Base/ListGroups'));
 const Navbars = React.lazy(() => import('./views/Base/Navbars'));
@@ -35,17 +39,28 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
+const Programas = React.lazy(() => import('./views/social/Programas'));
+const Alumnos = React.lazy(() => import('./views/social/alumnos'));
+const Beneficiarios = React.lazy(() => import('./views/social/beneficiarios'));
+const Empresas = React.lazy(() => import('./views/social/empresas'));
+const Universidades = React.lazy(() => import('./views/social/universidades'));
+// const Login = React.lazy(()=> import('./views/Pages/Login/Login'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  // { path: '/login', exact: true, name: 'Home', component:Login },
+  { path: '/grameen/inicio', exact:true, component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },
   { path: '/base/cards', name: 'Cards', component: Cards },
-  { path: '/base/forms', name: 'Forms', component: Forms },
+  { path: '/grameen/universidades', exact:true, component: Universidades },
+  { path: '/grameen/alumnos',  exact:true,component: Alumnos },
+  { path: '/grameen/empresas',  exact:true,component: Empresas },
+  { path: '/grameen/admon', exact:true, component: Buttons },
+  { path: '/grameen/programas', component: Programas },
+  { path: '/grameen/beneficiarios', exact:true, component: Beneficiarios },
   { path: '/base/switches', name: 'Switches', component: Switches },
   { path: '/base/tables', name: 'Tables', component: Tables },
   { path: '/base/tabs', name: 'Tabs', component: Tabs },
@@ -77,8 +92,9 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
 
 export default routes;
+
