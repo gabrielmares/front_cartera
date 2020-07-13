@@ -3,3 +3,22 @@
     align-content: center;
     align-items: center;
 }
+
+.salirBoton{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+.photo{
+    height: 200px;
+  width: 400px;
+  max-width: 500px;
+}
+
+.cardsrow{
+  max-height: 310px;
+}

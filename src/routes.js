@@ -48,7 +48,6 @@ const Universidades = React.lazy(() => import('./views/social/universidades'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  // { path: '/login', exact: true, name: 'Home', component:Login },
   { path: '/grameen/inicio', exact:true, component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
@@ -81,11 +80,11 @@ const routes = [
   { path: '/buttons/button-dropdowns', name: 'Button Dropdowns', component: ButtonDropdowns },
   { path: '/buttons/button-groups', name: 'Button Groups', component: ButtonGroups },
   { path: '/buttons/brand-buttons', name: 'Brand Buttons', component: BrandButtons },
-  { path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons },
-  { path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
-  { path: '/icons/flags', name: 'Flags', component: Flags },
-  { path: '/icons/font-awesome', name: 'Font Awesome', component: FontAwesome },
-  { path: '/icons/simple-line-icons', name: 'Simple Line Icons', component: SimpleLineIcons },
+  { path: '/grameen/icons', exact: true, name: 'Icons', component: CoreUIIcons },
+  { path: '/grameen/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
+  { path: '/grameen/icons/flags', name: 'Flags', component: Flags },
+  { path: '/grameen/icons/font-awesome', name: 'Font Awesome', component: FontAwesome },
+  { path: '/grameen/icons/simple-line-icons', name: 'Simple Line Icons', component: SimpleLineIcons },
   { path: '/notifications', exact: true, name: 'Notifications', component: Alerts },
   { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
   { path: '/notifications/badges', name: 'Badges', component: Badges },

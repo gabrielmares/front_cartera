@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Link, NavLink } from 'react-router-dom';
-import {  Nav, Button } from 'reactstrap';
+import { Nav, Button, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -28,14 +28,15 @@ class DefaultHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        <Nav className="d-md-down-none" navbar>
 
-        </Nav>
         <Nav className="ml-auto" navbar>
-          
-            <Button color="link" className="fa fa-sign-out font-3x1" onClick={e => this.props.onLogout(e)}>Salir</Button>
 
         </Nav>
+        <Col col="2" sm="1" md="1" className="mb-xl-0">
+          <Button block outline color="danger" onClick={e => this.props.onLogout(e)}>
+            <i className="cui-account-logout "></i>&nbsp;Salir
+                </Button>
+        </Col>
       </React.Fragment>
     );
   }

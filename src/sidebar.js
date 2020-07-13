@@ -83,12 +83,12 @@ export default {
         // },
         // {
         //     name: 'Icons',
-        //     url: '/icons',
+        //     url: '/grameen/icons',
         //     icon: 'icon-star',
         //     children: [
         //         {
         //             name: 'CoreUI Icons',
-        //             url: '/icons/coreui-icons',
+        //             url: '/grameen/icons/coreui-icons',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'info',
@@ -97,12 +97,12 @@ export default {
         //         },
         //         {
         //             name: 'Flags',
-        //             url: '/icons/flags',
+        //             url: '/grameen/icons/flags',
         //             icon: 'icon-star',
         //         },
         //         {
         //             name: 'Font Awesome',
-        //             url: '/icons/font-awesome',
+        //             url: '/grameen/icons/font-awesome',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'secondary',
@@ -111,11 +111,11 @@ export default {
         //         },
         //         {
         //             name: 'Simple Line Icons',
-        //             url: '/icons/simple-line-icons',
+        //             url: '/grameen/icons/simple-line-icons',
         //             icon: 'icon-star',
         //         },
         //     ],
-        // },
+        // }
         // {
         //   name: 'Charts',
         //   url: '/charts',

@@ -61,7 +61,7 @@ return (
                         <i className="icon-user"></i>
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input type="text" name="username" value={username} placeholder="username" id="username" onChange={_onChange} autoComplete="username" />
+                    <Input type="text" name="username" value={username} placeholder="Usuario" id="username" onChange={_onChange} autoComplete="username" />
                   </InputGroup>
                   <InputGroup className="mb-4">
                     <InputGroupAddon addonType="prepend">
@@ -72,21 +72,14 @@ return (
                     <Input type="password" name="password" id="password" value={password} placeholder="Contraseña" onChange={_onChange} autoComplete="current-password" />
                   </InputGroup>
                   <Row>
-                    {/* <Col xs="6" className="text-center">
-                          <Button color="primary" className="px-4">Entrar</Button>
-                        </Col> */}
+                    
                     <CardBody className="text-center">
                       <div>
-                        {/* <Link to="/">
-                              
-                            </Link> */}
-                        {/* <Button type="submit" color="primary" className="col-12 mt-6">Entrar</Button> */}
+                        
                         <button type="submit" className="btn btn-primary">Entrar</button>
                       </div>
                     </CardBody>
-                    {/* <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </Col> */}
+                   
                   </Row>
                 </Form>
               </CardBody>
@@ -94,14 +87,7 @@ return (
             <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
               <CardBody className="text-center">
                 <CardImg top width="10%" src={img} alt="Grameen AC" />
-                {/* <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
-                      </Link>
-                    </div> */}
+                
               </CardBody>
             </Card>
           </CardGroup>

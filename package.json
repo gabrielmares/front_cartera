@@ -7,9 +7,7 @@
   "copyright": "Copyright 2017-2019 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "private": true,
-  "repository": {
-    
-  },
+  "repository": {},
   "dependencies": {
     "@coreui/coreui": "^2.1.16",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
@@ -46,9 +44,9 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"
   },
-  // "bugs": {
-  //   "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
-  // },
+  "bugs": {
+    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -1,18 +1,33 @@
 import React from 'react';
-import {Col, CardBody, Card, CardHeader, FormGroup, Input, Label } from 'reactstrap'
+import { CardGroup, Row } from 'reactstrap'
+import CardProgram from './program';
+import Proyects from '../../proyects';
+
 
 const Programas = () => {
+    const { proyects } = Proyects;
     return (
-        <Col xs="12" sm="6">
-            <Card>
-                <CardHeader>
-                    <strong>Programas</strong>
-                    {/* <small> Form</small> */}
-                </CardHeader>
-                <CardBody>
-                    <FormGroup>
-                        <Label htmlFor="company">Company</Label>
-                        <Input type="text" id="company" placeholder="Enter your company name" />
+        <React.Fragment>
+            {/* <h1>proyectos</h1> */}
+            <Row>
+                <CardGroup>
+                    {
+                        proyects.map(proyect => (
+                            <CardProgram program={proyect} key={proyect.id} />
+                        ))
+                    }
+                </CardGroup>
+            </Row>
+        </React.Fragment>
+    )
+}
+
+export default Programas;
+
+/*
+<FormGroup>
+                        <Label htmlFor="proyect">Proyecto</Label>
+                        <Input type="text" id="proyect" placeholder="Asignar nombre al proyecto" />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="vat">VAT</Label>
@@ -40,10 +55,17 @@ const Programas = () => {
                         <Label htmlFor="country">Country</Label>
                         <Input type="text" id="country" placeholder="Country name" />
                     </FormGroup>
+
+
+                    <Col xs="12" sm="2">
+            <Card>
+                <CardImg top width="100%" src={} alt="" />
+                <CardBody>
+                    <CardTitle><strong>Nombre del programa</strong></CardTitle>
+                    <CardText className="justify">It was popularised in the 1960s with the release of Letraset sheets containing</CardText>
+
+
                 </CardBody>
             </Card>
         </Col>
-    );
-}
-
-export default Programas;
+*/
