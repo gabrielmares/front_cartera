@@ -22,3 +22,8 @@
 .cardsrow{
   max-height: 310px;
 }
+
+.photoul{
+  height: 150px;
+  width: 180px;
+}

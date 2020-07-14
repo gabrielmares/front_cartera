@@ -1,24 +1,42 @@
-import React from 'react';
-import { CardGroup, Row } from 'reactstrap'
+import React, { useState } from 'react';
+import { CardGroup, Row, Button, ButtonGroup } from 'reactstrap'
 import CardProgram from './program';
 import Proyects from '../../proyects';
 
 
 const Programas = () => {
     const { proyects } = Proyects;
+    const [view, setView] = useState(false);
+
+    // const margin = view => {
+    //     console.log(view)
+    //     if (view) {
+    //         return 0;
+    //     } else {
+    //         return `paddingLeft: '10%'`;
+    //     }
+    // }
+    
     return (
         <React.Fragment>
-            {/* <h1>proyectos</h1> */}
+            <div className="d-flex justify-content-end mb-2">
+                <div className="col-example text-left">
+                    <ButtonGroup>
+                        <Button color="light" onClick={() => setView(true)}><i className="fa fa-table fa-sm"></i></Button>
+                        <Button color="light" onClick={() => setView(false)}><i className="fa fa-list fa-sm"></i></Button>
+                    </ButtonGroup>
+                </div>
+            </div>
             <Row>
                 <CardGroup>
                     {
-                        proyects.map(proyect => (
-                            <CardProgram program={proyect} key={proyect.id} />
-                        ))
-                    }
+                    proyects.map(proyect => (
+                        <CardProgram view={view} program={proyect} key={proyect.id} />
+                    ))
+                }
                 </CardGroup>
             </Row>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 

@@ -81,41 +81,41 @@ export default {
         //     icon: 'icon-note'
         // }
         // },
-        // {
-        //     name: 'Icons',
-        //     url: '/grameen/icons',
-        //     icon: 'icon-star',
-        //     children: [
-        //         {
-        //             name: 'CoreUI Icons',
-        //             url: '/grameen/icons/coreui-icons',
-        //             icon: 'icon-star',
-        //             badge: {
-        //                 variant: 'info',
-        //                 text: 'NEW',
-        //             },
-        //         },
-        //         {
-        //             name: 'Flags',
-        //             url: '/grameen/icons/flags',
-        //             icon: 'icon-star',
-        //         },
-        //         {
-        //             name: 'Font Awesome',
-        //             url: '/grameen/icons/font-awesome',
-        //             icon: 'icon-star',
-        //             badge: {
-        //                 variant: 'secondary',
-        //                 text: '4.7',
-        //             },
-        //         },
-        //         {
-        //             name: 'Simple Line Icons',
-        //             url: '/grameen/icons/simple-line-icons',
-        //             icon: 'icon-star',
-        //         },
-        //     ],
-        // }
+        {
+            name: 'Icons',
+            url: '/grameen/icons',
+            icon: 'icon-star',
+            children: [
+                {
+                    name: 'CoreUI Icons',
+                    url: '/grameen/icons/coreui-icons',
+                    icon: 'icon-star',
+                    badge: {
+                        variant: 'info',
+                        text: 'NEW',
+                    },
+                },
+                {
+                    name: 'Flags',
+                    url: '/grameen/icons/flags',
+                    icon: 'icon-star',
+                },
+                {
+                    name: 'Font Awesome',
+                    url: '/grameen/icons/font-awesome',
+                    icon: 'icon-star',
+                    badge: {
+                        variant: 'secondary',
+                        text: '4.7',
+                    },
+                },
+                {
+                    name: 'Simple Line Icons',
+                    url: '/grameen/icons/simple-line-icons',
+                    icon: 'icon-star',
+                },
+            ],
+        }
         // {
         //   name: 'Charts',
         //   url: '/charts',

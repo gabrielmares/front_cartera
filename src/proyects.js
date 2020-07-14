@@ -45,7 +45,7 @@ export default {
         {
             img: mayo,
             title: "Proyecto 3",
-            description: "Descripcion imagen mujer y cabello azul ss ssssss ssssssss ssssss ss ss ssss",
+            description: "Descripcion imagen mujer y cabello azul",
             id:7
         },
         {
