@@ -205,7 +205,7 @@ class Dashboard extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-primary">
+            <Card color="primary" className="text-white ">
               <CardBody className="pb-0">
                 <NavLink ></NavLink>
                

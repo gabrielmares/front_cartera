@@ -20,10 +20,15 @@
 }
 
 .cardsrow{
-  max-height: 310px;
+  max-height: 300px;
 }
 
 .photoul{
-  height: 150px;
-  width: 180px;
+  height: 170px;
+  width: 200px;
+}
+
+.contentCard{
+  display: flex;
+    justify-content: space-between;
 }

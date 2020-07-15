@@ -32,9 +32,10 @@ class DefaultHeader extends Component {
         <Nav className="ml-auto" navbar>
 
         </Nav>
-        <Col col="2" sm="1" md="1" className="mb-xl-0">
-          <Button block outline color="danger" onClick={e => this.props.onLogout(e)}>
-            <i className="cui-account-logout "></i>&nbsp;Salir
+        <Col col="2" sm="2" md="2" xl="1" className="justify-content-end">
+          <Button id="LogOut" outline color="danger" onClick={e => this.props.onLogout(e)}>
+            <i className="cui-account-logout"></i>&nbsp;
+            Salir
                 </Button>
         </Col>
       </React.Fragment>

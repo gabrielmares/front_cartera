@@ -6,7 +6,7 @@ import Proyects from '../../proyects';
 
 const Programas = () => {
     const { proyects } = Proyects;
-    const [view, setView] = useState(false);
+    const [view, setView] = useState(true);
 
     // const margin = view => {
     //     console.log(view)
