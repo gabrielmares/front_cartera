@@ -1,11 +1,6 @@
 {
   "name": "Sociales",
-  "version": "2.6.1",
-  "description": "CoreUI React Open Source Bootstrap 4 Admin Template",
-  "author": "Łukasz Holeczek",
-  "homepage": "https://coreui.io",
-  "copyright": "Copyright 2017-2019 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
+  
   "private": true,
   "repository": {},
   "dependencies": {
@@ -45,9 +40,6 @@
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"
-  },
-  "bugs": {
-    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
   },
   "eslintConfig": {
     "extends": "react-app"
