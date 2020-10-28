@@ -32,3 +32,25 @@
   display: flex;
     justify-content: space-between;
 }
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.linkDoc{
+  cursor: pointer;
+  
+}
+
+.fechas{
+  height: 2rem;
+}
+
+.tablarenovaciones{
+  overflow: auto;
+  display: block;
+  height: 664px;
+}
