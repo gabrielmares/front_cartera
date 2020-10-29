@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import axiosClient from '../helpers/axiosClient';
 
 export function Inputdate(fecnac) {
     // eslint-disable-next-line
@@ -63,7 +63,7 @@ export const useAuth = (data) => {
     // de la peticion, si el token esta vencido, se recibe un codigo 403
     useEffect(() => {
         if (!data) {
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/currentuser`, { withCredentials: true })
+            axiosClient.get('/api/currentuser')
                 .then(info => {
                     if (info.data.info) {
                         setGet({
@@ -90,3 +90,4 @@ export const useAuth = (data) => {
     }, [])
     return get;
 }
+
