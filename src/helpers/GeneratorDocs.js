@@ -5,7 +5,6 @@ import { ParseDate } from './Helpers'
 async function generateDoc(cliente) {
     const { edoResidencia: { EDORESIDENCIA }, munResidencia: { MUNRESIDENCIA }, pobResidencia: { POBRESIDENCIA },
         generales, familiar, ColResidencia: { COLRESIDENCIA }, nacestado: { EDONACIMIENTO }, actividad, credito: { MONTO }, vendedor } = cliente;
-    console.log(cliente)
     const { CODIGO, NOMBRE, NOMBRES, PATERNO, MATERNO, RFC, CURP, TELEFONO, DOMICILIO, CODPOS, FINCENTRO, FINGRUPO, FECNAC, NOIFE } = generales
     let data = {
         CODIGO,
