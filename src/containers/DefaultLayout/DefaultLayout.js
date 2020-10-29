@@ -1,9 +1,8 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
-
-
+import { usuarioContext } from '../../provider/contextUsers'
 import {
   // AppAside,
   AppHeader,
@@ -15,75 +14,62 @@ import {
   AppBreadcrumb2 as AppBreadcrumb,
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
-// sidebar nav config
 import navigation from '../../sidebar';
-// routes config
 import routes from '../../routes';
 
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
-// const Login = React.lazy(()=> import('../../views/Pages/Login/Login'));
 
-class DefaultLayout extends Component {
+const DefaultLayout = ({ usuario }) => {
+  // console.log(usuario)
+  let { info, setInfo } = useContext(usuarioContext);
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
-  signOut(e) {
-    e.preventDefault()
-    localStorage.removeItem('Demo');
-    // eslint-disable-next-line no-unused-expressions
-    // <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-    this.props.history.push('/')
+  const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+  if (info === null) {
+    setInfo(usuario)
   }
 
-  render() {
-    return (
-      <div className="app">
-        <AppHeader fixed>
-          <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} />
+  return (
+    <div className="app">
+      <AppHeader fixed>
+        <Suspense fallback={loading()}>
+          <DefaultHeader usuario={usuario.nombre} />
+        </Suspense>
+      </AppHeader>
+      <div className="app-body">
+        <AppSidebar fixed display="lg">
+          <AppSidebarHeader />
+          <AppSidebarForm />
+          <Suspense>
+            <AppSidebarNav navConfig={navigation} router={router} />
           </Suspense>
-        </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
-            <AppSidebarHeader />
-            <AppSidebarForm />
-            <Suspense>
-              <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
+          <AppSidebarFooter />
+          <AppSidebarMinimizer />
+        </AppSidebar>
+        <main className="main">
+          <AppBreadcrumb appRoutes={routes} router={router} />
+          <Container fluid>
+            <Suspense fallback={loading()}>
+              <Switch>
+                {routes.map((route, idx) => {
+                  return route.component ? (
+                    <Route
+                      key={idx}
+                      path={route.path}
+                      exact={route.exact}
+                      name={route.name}
+                      render={props => (
+                        <route.component {...props} />
+                      )} />
+                  ) : (null);
+                })}
+                <Redirect to="/grameen/inicio" />
+              </Switch>
             </Suspense>
-            <AppSidebarFooter />
-            <AppSidebarMinimizer />
-          </AppSidebar>
-          <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router} />
-            <Container fluid>
-              <Suspense fallback={this.loading()}>
-                <Switch>
-                  {routes.map((route, idx) => {
-                    return route.component ? (
-                      <Route
-                        key={idx}
-                        path={route.path}
-                        exact={route.exact}
-                        name={route.name}
-                        render={props => (
-                          <route.component {...props} />
-                        )} />
-                    ) : (null);
-                  })}
-                  <Redirect from="/" to="/inicio" />
-                </Switch>
-              </Suspense>
-            </Container>
-          </main>
-          {/* <AppAside fixed>
-            <Suspense fallback={this.loading()}>
-              <DefaultAside />
-            </Suspense>
-          </AppAside> */}
-        </div>
+          </Container>
+        </main>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default DefaultLayout;
