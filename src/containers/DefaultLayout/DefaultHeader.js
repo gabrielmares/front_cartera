@@ -1,49 +1,47 @@
-import React, { Component } from 'react';
-// import { Link, NavLink } from 'react-router-dom';
+import React from 'react';
 import { Nav, Button, Col } from 'reactstrap';
-import PropTypes from 'prop-types';
-
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/grameen_logo.png'
-// import sygnet from '../../assets/img/brand/sygnet.svg'
-
-const propTypes = {
-  children: PropTypes.node,
-};
-
-const defaultProps = {};
-
-class DefaultHeader extends Component {
-  render() {
-
-    // eslint-disable-next-line
-    const { children, ...attributes } = this.props;
-
-    return (
-      <React.Fragment>
-        <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
-          full={{ src: logo, width: 100, height: 25, alt: 'Grameen' }}
-        // minimized={{ src: sygnet, width: 35, height: 35, alt: 'CoreUI Logo' }}
-        />
-        <AppSidebarToggler className="d-md-down-none" display="lg" />
+import logo from '../../assets/img/brand/grameen_logo.png';
+import { useHistory } from 'react-router-dom';
+import axiosClient from '../../helpers/axiosClient'
 
 
-        <Nav className="ml-auto" navbar>
+const DefaultHeader = ({ usuario }) => {
 
-        </Nav>
-        <Col col="2" sm="2" md="2" xl="1" className="justify-content-end">
-          <Button id="LogOut" outline color="danger" onClick={e => this.props.onLogout(e)}>
-            <i className="cui-account-logout"></i>&nbsp;
-            Salir
-                </Button>
-        </Col>
-      </React.Fragment>
-    );
+
+  let history = useHistory()
+
+  // llamamos a la api para que borre los cookies de la sesion
+  // reenviamos a la pantalla principal
+  const signOut = async (e) => {
+    e.preventDefault()
+    await axiosClient.get('/api/logout');
+    history.push('/');
   }
+
+
+  return (
+    <React.Fragment>
+      <AppSidebarToggler className="d-lg-none" display="md" mobile />
+      <AppNavbarBrand
+        full={{ src: logo, width: 100, height: 25, alt: 'Grameen' }}
+      />
+      <AppSidebarToggler className="d-md-down-none" display="lg" />
+      <h2 style={{ paddingLeft: '2rem', marginTop: '10px' }}>{usuario}</h2>
+
+      <Nav className="ml-auto" navbar>
+
+      </Nav>
+      <Col col="2" sm="2" md="2" xl="1" className="justify-content-end">
+        <Button style={{ marginLeft: '50px' }} id="LogOut" outline color="danger" onClick={e => signOut(e)}>
+          <i className="cui-account-logout"></i>&nbsp;
+            Salir
+          </Button>
+      </Col>
+    </React.Fragment>
+  );
 }
 
-DefaultHeader.propTypes = propTypes;
-DefaultHeader.defaultProps = defaultProps;
+
 
 export default DefaultHeader;
