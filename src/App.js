@@ -22,8 +22,9 @@ const App = (props) => {
         <React.Suspense fallback={loading()}>
           <Switch>
             <Route exact path="/" name="Login Page" component={Login} />
-            <PrivateRoute exact path="/grameen/inicio" name="Home" component={DefaultLayout} />
-            <PrivateRoute exact path="/grameen/renovaciones" component={DefaultLayout} />
+            <Route>
+              <PrivateRoute path="/grameen/inicio" name="Home" component={DefaultLayout} />
+            </Route>
           </Switch>
         </React.Suspense>
       </BrowserRouter>
