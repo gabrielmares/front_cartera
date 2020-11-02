@@ -1,70 +1,59 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Button, Card, CardBody, CardHeader, Col, Container, Row } from 'reactstrap';
+import axiosClient from '../../helpers/axiosClient';
+import { Login } from '../Pages';
+import UsersTable from './UsersTable'
+import ModalRegister from '../Notifications/Modals/ModalRegister'
 
-import usersData from './UsersData'
 
-function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
+const Users = () => {
 
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
+  const [users, setUsers] = useState({
+    list: {},
+    ready: false
+  })
+  const { list, ready } = users
+  const [modal, setModal] = useState(false)
+  useEffect(() => {
+    axiosClient.get('/api/userslist')
+      .then(userslist => {
+        if (userslist.data !== "") {
+          return setUsers({
+            ready: true,
+            list: userslist.data
+          })
+        } else if (userslist.data.claims === 403) {
+          return <Redirect to="/" component={Login} />
+        }
+      })
+  }, [])
 
+  // if (modal) return ]
   return (
-    <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
-    </tr>
+    <div className="animated fadeIn">
+      <Container>
+        <Col xl={12}>
+          <Card>
+            <CardHeader className="justify-content-between">
+              <Row>
+                <Col className="col-auto mr-auto pt-2">
+                  <h4><i className="fa fa-align-justify"></i> Listado de Usuarios</h4>
+                </Col>
+                <Col className="col-auto">
+                  <Button color="primary" onClick={() => setModal(true)}>Agregar <i color="white" className="cui-user-follow"> </i></Button>
+                </Col>
+              </Row>
+            </CardHeader>
+            <CardBody>
+              {ready && (<UsersTable users={list} />)}
+              {modal && (<ModalRegister show={modal} hide={setModal} />)}
+            </CardBody>
+          </Card>
+        </Col>
+      </Container>
+    </div>
   )
-}
-
-class Users extends Component {
-
-  render() {
-
-    const userList = usersData.filter((user) => user.id < 10)
-
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col xl={6}>
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
-              </CardHeader>
-              <CardBody>
-                <Table responsive hover>
-                  <thead>
-                    <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
-                    )}
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    )
-  }
 }
 
 export default Users;
