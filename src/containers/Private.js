@@ -6,7 +6,7 @@ import Login from '../views/Pages/Login/Login';
 
 const PrivateRoute = ({ component: Component }) => {
 
-    const { info } = useContext(usuarioContext);
+    const { info, setInfo } = useContext(usuarioContext);
 
     let q = useAuth(info);
     const { pending, claims } = q
@@ -15,8 +15,8 @@ const PrivateRoute = ({ component: Component }) => {
     if (pending) return false;
 
     if (claims === 403) return <Redirect to="/" component={Login} />
-    let data = (!info) ? (claims) : (info)
-
+    let data = (!info) ? (claims) : (claims)
+    setInfo(data)
     return (
         <Component usuario={data} />
     );

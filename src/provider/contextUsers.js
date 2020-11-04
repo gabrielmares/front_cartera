@@ -4,12 +4,20 @@ export const usuarioContext = createContext();
 
 const UsersContext = (props) => {
     let [info, setInfo] = useState(null)
+    let [requestBySuc, setRequestBySuc] = useState({})
+    let [mngtUser, setMngtUser] = useState(null)
+
+
 
     return (
         <usuarioContext.Provider
             value={{
                 info,
-                setInfo
+                setInfo,
+                mngtUser,
+                setMngtUser,
+                requestBySuc,
+                setRequestBySuc
             }}
         >
             {props.children}

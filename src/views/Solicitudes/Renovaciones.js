@@ -1,43 +1,47 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CardHeader, Col, Card, Form, Input, Label, Button, Spinner, CustomInput } from 'reactstrap';
 import RequestTable from './RequestTable';
 import DangerModal from '../Notifications/Modals/Modals';
-
-import { Inputdate, CambiarFecha } from '../../helpers/Helpers'
+import SpinnerModal from '../Notifications/Modals/SpinnerModal'
+import { Inputdate, CambiarFecha, sumaFechas } from '../../helpers/Helpers'
 import { useHistory } from 'react-router-dom';
 import axiosClient from '../../helpers/axiosClient';
+import { usuarioContext } from '../../provider/contextUsers'
 
 
 const Renovacion = () => {
     let history = useHistory();
     const [spin, setSpin] = React.useState(false)
     const [submit, setSubmit] = React.useState({
-        info: null,
+        toRequest: null,
         getInfo: false,
         noRows: true
     })
     const [modal, setModal] = React.useState(false);
+
+
+    const { requestBySuc, info } = useContext(usuarioContext)
+    const { toRequest, getInfo, noRows } = submit;
+    //toRequest contiene las solicitudes a renovar, getInfo, cuando cambia a true hace la llamada a la api
+    // noRows previene el bloqueo del componente cuando no encuentra valores que mostrar
+
     const [filter, setFilter] = React.useState({
-        FINNOSUCURSAL: "",
+        FINNOSUCURSAL: info.sucursal,
         centro: '',
         from: "",
         to: "",
     })
-
-
-    const { info, getInfo, noRows } = submit;
     const { FINNOSUCURSAL, centro, from, to } = filter
-
     React.useEffect(() => {
         if ((FINNOSUCURSAL > 0) && getInfo) {
             const get = async () => {
                 try {
                     let q = await axiosClient.get('/api/operaciones/listas', {
                         params: {
-                            FINNOSUCURSAL,
+                            FINNOSUCURSAL: FINNOSUCURSAL ? (FINNOSUCURSAL) : (parseInt(info.sucursal)),
                             CENTRO: centro ? (centro) : (0),
-                            DESDE: from ? (from) : ('2019-01-01'),
-                            HASTA: to ? (to) : (CambiarFecha(Date.now()))
+                            DESDE: from ? (from) : (CambiarFecha(Date.now())),
+                            HASTA: to ? (to) : (CambiarFecha(sumaFechas(new Date(), 14)))
                         }
                     })
                     if (q.data.codigo === 403) {
@@ -48,15 +52,15 @@ const Renovacion = () => {
                         setSpin(false)
                         return setSubmit({
                             getInfo: false,
-                            info: null,
+                            toRequest: null,
                             noRows: true
                         })
                     }
                     // pasamos los registros al state para pintarlos en pantalla y quitamos el spin
                     setSpin(false)
-                    setSubmit({
+                    return setSubmit({
                         getInfo: false,
-                        info: q.data,
+                        toRequest: q.data,
                         noRows: false
                     })
                 } catch (error) {
@@ -100,19 +104,24 @@ const Renovacion = () => {
     }
 
     if (modal) {
-        return (<DangerModal
-            msg={'La sesion ha caducado, vuelva a iniciar sesion'}
-            action={reset}
-            header={'Error de sesion de usuario'}
-            type={'modal-danger'}
-        />
+        return (
+            <DangerModal
+                msg={'La sesion ha caducado, vuelva a iniciar sesion'}
+                action={reset}
+                header={'Error de sesion de usuario'}
+                type={'modal-danger'}
+            />
 
         )
 
     }
-
-
-
+    if (requestBySuc.length > 0 && !toRequest) {
+        return setSubmit({
+            getInfo: false,
+            toRequest: requestBySuc,
+            noRows: false
+        })
+    }
 
     return (
         <Col style={{ marginLeft: '12rem' }} className="animated fadeIn" lg='9' md='12'>
@@ -133,7 +142,7 @@ const Renovacion = () => {
                             name="FINNOSUCURSAL"
                             value={FINNOSUCURSAL}
                             onChange={(e) => handleChange(e)}
-                            disabled={spin}
+                            disabled={(spin || (info.sucursal > 0))}
                         >
                             <option value={null}></option>
                             <option value="1">Obregon</option>
@@ -195,18 +204,17 @@ const Renovacion = () => {
                     </Form>
                 </CardHeader>
                 {spin && (
-                    <Spinner
-                        color="info"
-                        size='md'
-                        style={{ width: '3rem', height: '3rem' }}
-                        type='grow'
+                    <SpinnerModal
+                        modal={spin}
                     />
                 )}
                 {noRows ?
                     (null)
                     : (
                         <RequestTable
-                            info={info}
+                            info={toRequest}
+                            show={spin}
+                            hide={setSpin}
                         />
                     )
                 }
