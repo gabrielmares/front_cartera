@@ -20,13 +20,17 @@ import routes from '../../routes';
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 const DefaultLayout = ({ usuario }) => {
-  // console.log(usuario)
   let { info, setInfo } = useContext(usuarioContext);
-
+  // const [loading, setLoading] = React.useState(true)
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
   if (info === null) {
     setInfo(usuario)
   }
+
+  // filtrado de rutas por tipo tipo de usuario
+  let filterRoutes = routes.filter(route => route.rol >= info.rol)
+  let filterSidebar = {};
+  filterSidebar.items = navigation.items.filter(nav => nav.rol >= info.rol)
 
   return (
     <div className="app">
@@ -40,7 +44,9 @@ const DefaultLayout = ({ usuario }) => {
           <AppSidebarHeader />
           <AppSidebarForm />
           <Suspense>
-            <AppSidebarNav navConfig={navigation} router={router} />
+            <AppSidebarNav navConfig={filterSidebar} router={router} />
+            {/* aqui podremos filtrar las rutas del sidebar, en el componente sidebar colocamos el rol del usuario
+            y lo filtramos antes de enviarlo al componente sidebar */}
           </Suspense>
           <AppSidebarFooter />
           <AppSidebarMinimizer />
@@ -50,8 +56,9 @@ const DefaultLayout = ({ usuario }) => {
           <Container fluid>
             <Suspense fallback={loading()}>
               <Switch>
-                {routes.map((route, idx) => {
-                  return route.component ? (
+                {filterRoutes.map((route, idx) => {
+                  console.log(route, info)
+                  return (route.component /* && (route.rol >= info.rol) */) ? (
                     <Route
                       key={idx}
                       path={route.path}
