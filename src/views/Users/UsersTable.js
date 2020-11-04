@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'reactstrap'
+import { Button, ButtonGroup, Table } from 'reactstrap'
 
 const UsersTable = ({ users }) => {
     const rolUser = (rol) => {
@@ -63,15 +63,25 @@ const UsersTable = ({ users }) => {
                     <th scope="col">Email</th>
                     <th scope="col">Rol</th>
                     <th scope="col">Sucursal</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody className="text-center">
                 {(users.map((user, index) => (
-                    <tr key={index}>
+                    <tr key={index} className="align-self-center">
                         <th>{user.nombre}</th>
                         <td>{user.email}</td>
                         <td>{rolUser(user.rol)}</td>
                         <td>{sucursalUser(user.sucursal)}</td>
+                        <td className="row justify-content-center" style={{ width: '200px' }}>
+                            <ButtonGroup>
+                                {(user.status) ?
+                                    (<Button color="link"><i className="ml-4 cui-lock-unlocked text-warning font-2xl" title="Cuenta activa"></i></Button>) :
+                                    (<Button color="link"><i className="cui-lock-locked text-warning font-2xl" title="Cuenta desactivada"></i></Button>)}
+                                <Button color="link"><i className="cui-wrench font-2xl" title="Modificar"></i></Button>
+                                <Button color="link"><i className="cui-trash icons font-2xl text-danger" title="Eliminar usuario"></i></Button>
+                            </ButtonGroup>
+                        </td>
                     </tr>
                 )
                 ))}
