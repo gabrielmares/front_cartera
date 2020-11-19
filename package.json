@@ -1,6 +1,7 @@
 {
   "name": "Renovaciones",
   "private": true,
+  "homepage": "/",
   "repository": {},
   "dependencies": {
     "@coreui/coreui": "^2.1.16",
@@ -15,6 +16,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
     "easy-template-x": "^1.0.1",
+    "env-cmd": "^10.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "flag-icon-css": "^3.5.0",
@@ -37,6 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:env": "env-cmd -f .env npm run build",
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
