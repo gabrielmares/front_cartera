@@ -57,7 +57,6 @@ const DefaultLayout = ({ usuario }) => {
             <Suspense fallback={loading()}>
               <Switch>
                 {filterRoutes.map((route, idx) => {
-                  console.log(route, info)
                   return (route.component /* && (route.rol >= info.rol) */) ? (
                     <Route
                       key={idx}
