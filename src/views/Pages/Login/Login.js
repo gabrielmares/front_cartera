@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import img from "../Login/grameen.png";
 import PrivateRoute from '../../../containers/Private'
 import axiosClient from '../../../helpers/axiosClient'
 import { useAuth } from '../../../helpers/Helpers'
+import { usuarioContext } from '../../../provider/contextUsers';
 
 const DefaultLayout = React.lazy(() => import('../../../containers/DefaultLayout'));
 
 const Login = (props) => {
   let history = useHistory();
-
+  let { setInfo } = useContext(usuarioContext)
   const LayOut = (claims) => {
+    setInfo(claims)
     history.push('/grameen/inicio');
     return <PrivateRoute path="/grameen/inicio" component={<DefaultLayout usuario={claims} />} />
   }
@@ -29,7 +31,6 @@ const Login = (props) => {
   // si habia sesion y caduco continuar con el proceso de loggeo,
   // de otra manera,redirige a la pantalla de inicio
   if (claims !== 403) {
-    debugger
     return LayOut(claims);
   }
 
