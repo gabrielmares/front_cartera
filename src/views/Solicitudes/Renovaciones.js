@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CardHeader, Col, Card, Form, Input, Label, Button, Spinner, CustomInput } from 'reactstrap';
+import { CardHeader, Col, Card, Form, Input, Label, Button, CustomInput } from 'reactstrap';
 import RequestTable from './RequestTable';
 import DangerModal from '../Notifications/Modals/Modals';
 import SpinnerModal from '../Notifications/Modals/SpinnerModal'
@@ -33,12 +33,12 @@ const Renovacion = () => {
     })
     const { FINNOSUCURSAL, centro, from, to } = filter
     React.useEffect(() => {
-        if ((FINNOSUCURSAL > 0) && getInfo) {
+        if (getInfo) {
             const get = async () => {
                 try {
                     let q = await axiosClient.get('/api/operaciones/listas', {
                         params: {
-                            FINNOSUCURSAL: FINNOSUCURSAL ? (FINNOSUCURSAL) : (parseInt(info.sucursal)),
+                            FINNOSUCURSAL: FINNOSUCURSAL, 
                             CENTRO: centro ? (centro) : (0),
                             DESDE: from ? (from) : (CambiarFecha(Date.now())),
                             HASTA: to ? (to) : (CambiarFecha(sumaFechas(new Date(), 14)))
@@ -94,6 +94,9 @@ const Renovacion = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        // si el usuario administrador, oficial o gerente puede enviar la solicitud en blanco
+        // el resto de usuarios con sucursal asignada, se les rellena el input con el numero de sucursal
+        // y se bloquea el campo, evitando revisar sucursales ajenas
         if (isNaN(FINNOSUCURSAL) || FINNOSUCURSAL === "") return false
         setSpin(true);
         setSubmit({
@@ -144,10 +147,10 @@ const Renovacion = () => {
                             onChange={(e) => handleChange(e)}
                             disabled={(spin || (info.sucursal > 0))}
                         >
-                            <option value={null}></option>
-                            <option value="1">Obregon</option>
-                            <option value="2">Huatabampo</option>
-                            <option value="3">Navojoa</option>
+                            <option value={0}></option>
+                            <option value={1}>Obregon</option>
+                            <option value={2}>Huatabampo</option>
+                            <option value={3}>Navojoa</option>
                         </CustomInput>
                         {/* separador */}
                         <Label
