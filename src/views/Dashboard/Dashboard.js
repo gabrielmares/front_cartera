@@ -66,7 +66,7 @@ const Dashboard = () => {
   return (
     <div className="animated fadeIn">
       <Row>
-        {(obregon.length > 0) ? (<Col xs="12" sm="6" lg="3">
+        {(info.sucursal===1 || info.sucursal===0) ? (<Col xs="12" sm="6" lg="3">
           <Card className="text-white bg-primary " onClick={() => routeTo(obregon)} style={{ cursor: 'pointer' }}>
             <CardBody className="pb-0">
               <NavLink ><div className="text-value">{obregon.length}</div></NavLink>
@@ -77,7 +77,7 @@ const Dashboard = () => {
           </Card>
         </Col>) : (null)}
 
-        {(huatabampo.length > 0) ? (<Col xs="12" sm="6" lg="3" >
+        {(info.sucursal===2 || info.sucursal===0) ? (<Col xs="12" sm="6" lg="3" >
           <Card className="text-white bg-success" onClick={() => routeTo(huatabampo)} style={{ cursor: 'pointer' }}>
             <CardBody className="pb-0">
               <NavLink ><div className="text-value">{huatabampo.length}</div></NavLink>
@@ -89,7 +89,7 @@ const Dashboard = () => {
         </Col>) : (null)}
 
 
-        {(navojoa.length > 0) ? (<Col xs="12" sm="6" lg="3">
+        {(info.sucursal===3 || info.sucursal===0) ? (<Col xs="12" sm="6" lg="3">
           <Card className="text-white bg-info" onClick={() => routeTo(navojoa)} style={{ cursor: 'pointer' }}>
             <CardBody className="pb-0">
               <NavLink ><div className="text-value">{navojoa.length}</div></NavLink>
