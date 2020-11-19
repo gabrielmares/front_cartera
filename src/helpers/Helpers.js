@@ -91,3 +91,28 @@ export const useAuth = (data) => {
     return get;
 }
 
+
+
+export const updateUser = (info) => {
+    if (!info.email) return false;
+    axiosClient.put('/update', info.email)
+        .then((user) => {
+            console.log(user);
+        })
+}
+
+export const deleteUser = (email) => {
+    if (!email) return false;
+    axiosClient.delete('/delete', email)
+        .then((user) => {
+            console.log(user);
+        })
+}
+
+export const disable = (email) => {
+    if (!email) return false;
+    axiosClient.put('/denied', email)
+        .then((user) => {
+            console.log(user);
+        })
+}
