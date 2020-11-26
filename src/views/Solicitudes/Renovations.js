@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CardHeader, Col, Card, Form, Input, Label, Button, CustomInput } from 'reactstrap';
-import RequestTable from './RequestTable';
+import RequestTable from './RenovationTable';
 import DangerModal from '../Notifications/Modals/Modals';
 import SpinnerModal from '../Notifications/Modals/SpinnerModal'
 import { Inputdate, CambiarFecha, sumaFechas } from '../../helpers/Helpers'
