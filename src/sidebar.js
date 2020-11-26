@@ -39,6 +39,12 @@ export default {
             rol: 7
         },
         {
+            name: 'Solicitudes',
+            url: '/grameen/solicitudes',
+            icon: 'icon-star',
+            rol: 7
+        },
+        {
             name: "Renovaciones",
             url: "/grameen/renovaciones",
             icon: "icon-star",
@@ -93,6 +99,12 @@ export default {
         {
             name: 'Roles y Usuarios',
             url: '/grameen/admon/users',
+            icon: 'icon-note',
+            rol: 1
+        },
+        {
+            name: 'Configuracion',
+            url: '/grameen/admon/configuration',
             icon: 'icon-note',
             rol: 1
         },
@@ -197,47 +209,12 @@ export default {
         //     },
         //   ],
         // },
-        // {
-        //   name: 'Widgets',
-        //   url: '/widgets',
-        //   icon: 'icon-calculator',
-        //   badge: {
-        //     variant: 'info',
-        //     text: 'NEW',
-        //   },
-        // },
-
-        // {
-        //   title: true,
-        //   name: 'Extras',
-        // },
-        // {
-        //   name: 'Pages',
-        //   url: '/pages',
-        //   icon: 'icon-star',
-        //   children: [
-        //     {
-        //       name: 'Login',
-        //       url: '/login',
-        //       icon: 'icon-star',
-        //     },
-        //     {
-        //       name: 'Register',
-        //       url: '/register',
-        //       icon: 'icon-star',
-        //     },
-        //     {
-        //       name: 'Error 404',
-        //       url: '/404',
-        //       icon: 'icon-star',
-        //     },
-        //     {
-        //       name: 'Error 500',
-        //       url: '/500',
-        //       icon: 'icon-star',
-        //     },
-        //   ],
-        // }
+        {
+            name: 'Widgets',
+            url: '/grameen/widgets',
+            icon: 'icon-calculator',
+            rol: 1
+        },
 
     ],
 };
