@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalFooter, Spinner } from 'reactstrap';
+import { Modal, Spinner } from 'reactstrap';
 
 const SpinnerModal = ({ modal }) => {
 
