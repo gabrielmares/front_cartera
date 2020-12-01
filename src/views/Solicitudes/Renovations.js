@@ -13,15 +13,15 @@ const Renovacion = () => {
     let history = useHistory();
     const [spin, setSpin] = React.useState(false)
     const [submit, setSubmit] = React.useState({
-        toRequest: null,
+        toRenovation: [],
         getInfo: false,
         noRows: true
     })
     const [modal, setModal] = React.useState(false);
 
 
-    const { requestBySuc, info } = useContext(usuarioContext)
-    const { toRequest, getInfo, noRows } = submit;
+    const { renovations, info, setRenovations } = useContext(usuarioContext)
+    const { toRenovation, getInfo, noRows } = submit;
     //toRequest contiene las solicitudes a renovar, getInfo, cuando cambia a true hace la llamada a la api
     // noRows previene el bloqueo del componente cuando no encuentra valores que mostrar
 
@@ -38,7 +38,7 @@ const Renovacion = () => {
                 try {
                     let q = await axiosClient.get('/api/operaciones/listas', {
                         params: {
-                            FINNOSUCURSAL: FINNOSUCURSAL, 
+                            FINNOSUCURSAL: FINNOSUCURSAL,
                             CENTRO: centro ? (centro) : (0),
                             DESDE: from ? (from) : (CambiarFecha(Date.now())),
                             HASTA: to ? (to) : (CambiarFecha(sumaFechas(new Date(), 14)))
@@ -52,7 +52,7 @@ const Renovacion = () => {
                         setSpin(false)
                         return setSubmit({
                             getInfo: false,
-                            toRequest: null,
+                            toRenovation: null,
                             noRows: true
                         })
                     }
@@ -60,7 +60,7 @@ const Renovacion = () => {
                     setSpin(false)
                     return setSubmit({
                         getInfo: false,
-                        toRequest: q.data,
+                        toRenovation: q.data,
                         noRows: false
                     })
                 } catch (error) {
@@ -118,10 +118,17 @@ const Renovacion = () => {
         )
 
     }
-    if (requestBySuc.length > 0 && !toRequest) {
+
+    // si no hay solicitudes almacenadas en el state global, se le asignan las del state local
+    if (renovations.length === 0 && toRenovation.length > 0) {
+        return setRenovations(toRenovation)
+    }
+
+// cuando el state global tiene la informacion, las pasa al state local
+    if (renovations.length > 0 && toRenovation.length === 0) {
         return setSubmit({
             getInfo: false,
-            toRequest: requestBySuc,
+            toRenovation: renovations,
             noRows: false
         })
     }
@@ -215,7 +222,7 @@ const Renovacion = () => {
                     (null)
                     : (
                         <RequestTable
-                            info={toRequest}
+                            info={toRenovation}
                             show={spin}
                             hide={setSpin}
                         />
