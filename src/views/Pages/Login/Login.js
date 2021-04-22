@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Button } from 'reactstrap';
+import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import img from "../Login/grameen.png";
-import logoPublico from '../Login/public.png'
 import PrivateRoute from '../../../containers/Private'
 import axiosClient from '../../../helpers/axiosClient'
 import { useAuth } from '../../../helpers/Helpers'
@@ -15,8 +14,8 @@ const Login = (props) => {
   let { setInfo } = useContext(usuarioContext)
   const LayOut = (claims) => {
     setInfo(claims)
-    history.push('/app/inicio');
-    return <PrivateRoute path="/app/inicio" component={<DefaultLayout usuario={claims} />} />
+    history.push('/grameen/inicio');
+    return <PrivateRoute path="/grameen/inicio" component={<DefaultLayout usuario={claims} />} />
   }
 
   const [user, saveuser] = useState({
@@ -24,10 +23,6 @@ const Login = (props) => {
     email: ""
   });
 
-
-  // funciones usadas en el entorno de produccion
-  // se deshabilito el hook de inicio de sesion
-  // por no poderse condicionar
 
   // revisamos si ya hay una sesion abierta en el navegador
   let { pending, claims } = useAuth();
@@ -43,20 +38,8 @@ const Login = (props) => {
   const { email, password } = user;
 
   // funcion para iniciar sesion, envia los datos al backend para firmar el token
-
   const LoginUser = async (e) => {
     e.preventDefault();
-    if (process.env.REACT_APP_JSON === 'TRUE' && email === 'demo@demo.com' && password === 'publico') {
-      window.localStorage.setItem('demo', true)
-      return LayOut({
-        email: 'demo@demo.com',
-        nombre: 'Demostracion',
-        rol: 3,
-        sucursal: 0
-      })
-    }
-
-
     if (email.trim() === "" || password.trim() === "") {
       return alert("Todos los campos son obligatorios");
     }
@@ -64,7 +47,6 @@ const Login = (props) => {
 
     if (login.data.info) {
       let { data: { user } } = login
-      console.log(user)
       return LayOut(user);
     }
 
@@ -111,17 +93,22 @@ const Login = (props) => {
                       </InputGroupAddon>
                       <Input type="password" name="password" id="password" value={password} placeholder="Contraseña" onChange={e => _onChange(e)} autoComplete="current-password" />
                     </InputGroup>
-                    <Row className='justify-content-center pt-4'>
-                      <Col>
-                        <Button size='md' block color='primary' onClick={e => LoginUser(e)}>Entrar</Button>
-                      </Col>
+                    <Row>
+
+                      <CardBody className="text-center">
+                        <div>
+
+                          <button type="submit" className="btn btn-primary" onClick={e => LoginUser(e)}>Entrar</button>
+                        </div>
+                      </CardBody>
+
                     </Row>
                   </Form>
                 </CardBody>
               </Card>
               <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
-                  <CardImg top width="10%" src={logoPublico || img} alt="Logo_empresa" />
+                  <CardImg top width="10%" src={img} alt="Grameen AC" />
 
                 </CardBody>
               </Card>

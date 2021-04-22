@@ -44,7 +44,7 @@ const InputFilter = ({ handleSubmit }) => {
                 name="FINNOSUCURSAL"
                 value={FINNOSUCURSAL}
                 onChange={(e) => handleChange(e)}
-                disabled={(spin || (info.sucursal > 0)) || process.env.REACT_APP_JSON === "TRUE"}
+                disabled={(spin || (info.sucursal > 0))}
             >
                 <option value={0}></option>
                 <option value={1}>Obregon</option>
@@ -63,7 +63,7 @@ const InputFilter = ({ handleSubmit }) => {
                 name="centro"
                 className="col-1 mr-4"
                 value={centro}
-                disabled={spin || process.env.REACT_APP_JSON === "TRUE"}
+                disabled={spin}
                 onChange={(e) => handleChange(e)}
             />
             {/* separador */}
@@ -78,7 +78,7 @@ const InputFilter = ({ handleSubmit }) => {
                 id="from"
                 className="col-2 fechas"
                 value={from}
-                disabled={spin || process.env.REACT_APP_JSON === "TRUE"}
+                disabled={spin}
                 onChange={(e) => handleChange(e)}
             />
             {/* separador */}
@@ -93,14 +93,14 @@ const InputFilter = ({ handleSubmit }) => {
                 name="to"
                 className="col-2 fechas"
                 value={to}
-                disabled={spin || process.env.REACT_APP_JSON === "TRUE"}
+                disabled={spin}
                 onChange={(e) => handleChange(e)}
             />
             <Button
                 type="submit"
                 className="ml-4 col-1"
                 color="success"
-                disabled={spin || process.env.REACT_APP_JSON === "TRUE"}
+                disabled={spin}
                 onClick={(e) => handleSubmit(e)}
             >Buscar</Button>
         </Form>

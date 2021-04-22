@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import axiosClient from '../../helpers/axiosClient';
 import { usuarioContext } from '../../provider/contextUsers';
-import JsonServer from '../../server'
+
 
 
 const Dashboard = () => {
@@ -30,59 +30,54 @@ const Dashboard = () => {
     requests: []
   })
 
-  const solicitudesPorSucursal = (totales) => {
-    console.log(info, totales)
-    switch (info.sucursal) {
-      case 0:
-        setObregon({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
-        })
-        setHuatabampo({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
-        })
-        setNavojoa({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
-        })
-        break;
-      case 1:
-        setObregon({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
-        })
-        break;
-      case 2:
-        setHuatabampo({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
-        })
-        break;
-      case 3:
-        setNavojoa({
-          renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
-          requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
-        })
-        break;
-      default:
-        break;
-    }
-    setLoading(false);
-
-  }
-
-
   // al cargar la vista, hace la llamada a la api para obtener la informacion a desplegar
-  // con solicitudes y renovaciones por sucursal
+// con solicitudes y renovaciones por sucursal
   const [loading, setLoading] = React.useState(true)
   React.useEffect(() => {
-    if (process.env.REACT_APP_JSON === 'TRUE') return solicitudesPorSucursal(JsonServer)
     axiosClient.get('/api/operaciones/totales', {
       params: {
         sucursal: info.sucursal
       }
-    }).then(totales => solicitudesPorSucursal(totales))
+    }).then(totales => {
+      switch (info.sucursal) {
+        case 0:
+          setObregon({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
+          })
+          setHuatabampo({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
+          })
+          setNavojoa({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
+          })
+          break;
+        case 1:
+          setObregon({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
+          })
+          break;
+        case 2:
+          setHuatabampo({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
+          })
+          break;
+        case 3:
+          setNavojoa({
+            renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
+            requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
+          })
+          break;
+        default:
+          break;
+      }
+      setLoading(false);
+
+    })
     // eslint-disable-next-line
   }, [info])
 
@@ -92,12 +87,12 @@ const Dashboard = () => {
   // si da clic en el cuadro de sucursales, lo reenvia a la vista donde se muestra el total de solicitudes por sucursal
   const renovationsTo = (lista) => {
     setRenovations(lista)
-    return history.push('/app/renovaciones');
+    return history.push('/grameen/renovaciones');
   }
-  // al dar clic a las solicitudes por sucursal, te reenvia a la vista y carga el componente en el state para ser desplegado
+// al dar clic a las solicitudes por sucursal, te reenvia a la vista y carga el componente en el state para ser desplegado
   const requestsTo = (lista) => {
     setRequestBySuc(lista);
-    return history.push('/app/solicitudes')
+    return history.push('/grameen/solicitudes')
   }
 
 
@@ -127,7 +122,7 @@ const Dashboard = () => {
         {(info.sucursal === 2 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3" >
           <Card className="text-white bg-success">
             <CardBody>
-              <h4>Huatabampo</h4>
+            <h4>Huatabampo</h4>
               <NavLink onClick={() => renovationsTo(huatabampo.renovations)} style={{ cursor: 'pointer' }} >
                 <div className="text-value" >
                   <div>{huatabampo.renovations.length}</div> <h6>Creditos por renovar </h6>
@@ -143,7 +138,7 @@ const Dashboard = () => {
         </Col>) : (null)}
 
 
-        {(info.sucursal === 3 || info.sucursal === 0) && (<Col xs="12" sm="6" lg="3">
+        {(info.sucursal === 3 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3">
           <Card className="text-white bg-info">
             <CardBody>
               <h4>Navojoa</h4>
@@ -159,7 +154,7 @@ const Dashboard = () => {
               </NavLink>
             </CardBody>
           </Card>
-        </Col>) }
+        </Col>) : (null)}
 
 
       </Row>

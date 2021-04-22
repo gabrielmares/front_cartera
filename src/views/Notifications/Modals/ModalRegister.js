@@ -42,7 +42,7 @@ const Modals = ({ show, hide }) => {
             }).then(res => {
                 if (res.data) {
                     console.log(res.data)
-                    history.push('/app/admon/users')
+                    history.push('/grameen/admon/users')
                     return hide(false)
                 }
             })
