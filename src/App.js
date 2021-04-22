@@ -23,7 +23,7 @@ const App = (props) => {
           <Switch>
             <Route exact path="/" name="Login Page" component={Login} />
             <Route>
-              <PrivateRoute path="/app/inicio" name="Home" component={DefaultLayout} />
+              <PrivateRoute path="/grameen/inicio" name="Home" component={DefaultLayout} />
             </Route>
           </Switch>
         </React.Suspense>

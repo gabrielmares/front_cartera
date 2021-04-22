@@ -4,6 +4,7 @@ import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { usuarioContext } from '../../provider/contextUsers'
 import {
+  // AppAside,
   AppHeader,
   AppSidebar,
   AppSidebarFooter,
@@ -20,6 +21,7 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 const DefaultLayout = ({ usuario }) => {
   let { info, setInfo } = useContext(usuarioContext);
+  // const [loading, setLoading] = React.useState(true)
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
   if (info === null) {
     setInfo(usuario)
@@ -55,7 +57,7 @@ const DefaultLayout = ({ usuario }) => {
             <Suspense fallback={loading()}>
               <Switch>
                 {filterRoutes.map((route, idx) => {
-                  return (route.component) && (
+                  return (route.component /* && (route.rol >= info.rol) */) ? (
                     <Route
                       key={idx}
                       path={route.path}
@@ -64,9 +66,9 @@ const DefaultLayout = ({ usuario }) => {
                       render={props => (
                         <route.component {...props} />
                       )} />
-                  )
+                  ) : (null);
                 })}
-                <Redirect to="/app/inicio" />
+                <Redirect to="/grameen/inicio" />
               </Switch>
             </Suspense>
           </Container>

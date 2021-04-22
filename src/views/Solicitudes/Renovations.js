@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CardHeader, Col, Card} from 'reactstrap';
+import { CardHeader, Col, Card, Form, Input, Label, Button, CustomInput } from 'reactstrap';
 import RequestTable from './RenovationTable';
 import DangerModal from '../Notifications/Modals/Modals';
 import SpinnerModal from '../Notifications/Modals/SpinnerModal'
@@ -7,7 +7,6 @@ import { Inputdate, CambiarFecha, sumaFechas } from '../../helpers/Helpers'
 import { useHistory } from 'react-router-dom';
 import axiosClient from '../../helpers/axiosClient';
 import { usuarioContext } from '../../provider/contextUsers'
-import InputsFilters from './components/InputsFilters'
 
 
 const Renovacion = () => {
@@ -125,7 +124,7 @@ const Renovacion = () => {
         return setRenovations(toRenovation)
     }
 
-    // cuando el state global tiene la informacion, las pasa al state local
+// cuando el state global tiene la informacion, las pasa al state local
     if (renovations.length > 0 && toRenovation.length === 0) {
         return setSubmit({
             getInfo: false,
@@ -140,7 +139,79 @@ const Renovacion = () => {
                 <CardHeader>
                     <h3 className='text-center'>Creditos a vencer por sucursal</h3>
                     <br />
-                    <InputsFilters handleSubmit={handleSubmit} />                
+                    <Form inline rows='1' style={{ marginLeft: '2rem' }}>
+                        <Label
+                            for="selectSucursal"
+                            className="mr-2">
+                            <b>Sucursal</b>
+                        </Label>
+                        <CustomInput
+                            type="select"
+                            id="selectSucursal"
+                            className="col-2 mr-2"
+                            name="FINNOSUCURSAL"
+                            value={FINNOSUCURSAL}
+                            onChange={(e) => handleChange(e)}
+                            disabled={(spin || (info.sucursal > 0))}
+                        >
+                            <option value={0}></option>
+                            <option value={1}>Obregon</option>
+                            <option value={2}>Huatabampo</option>
+                            <option value={3}>Navojoa</option>
+                        </CustomInput>
+                        {/* separador */}
+                        <Label
+                            for="inputCentro"
+                            className="mr-2 ml-3"
+                        >
+                            <b>Centro</b>
+                        </Label>
+                        <Input type="number"
+                            id="inputCentro"
+                            name="centro"
+                            className="col-1 mr-4"
+                            value={centro}
+                            disabled={spin}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        {/* separador */}
+                        <Label
+                            for="from"
+                            className="mr-2 ml-3">
+                            <b>Desde</b>
+                        </Label>
+                        <input
+                            type="date"
+                            name="from"
+                            id="from"
+                            className="col-2 fechas"
+                            value={from}
+                            disabled={spin}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        {/* separador */}
+                        <Label
+                            for="to"
+                            className="mr-2 ml-3">
+                            <b>Hasta</b>
+                        </Label>
+                        <input
+                            type="date"
+                            id="to"
+                            name="to"
+                            className="col-2 fechas"
+                            value={to}
+                            disabled={spin}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        <Button
+                            type="submit"
+                            className="ml-4 col-1"
+                            color="success"
+                            disabled={spin}
+                            onClick={(e) => handleSubmit(e)}
+                        >Buscar</Button>
+                    </Form>
                 </CardHeader>
                 {spin && (
                     <SpinnerModal

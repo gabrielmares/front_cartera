@@ -57,7 +57,7 @@ const Solicitudes = ({ rows, tipoUsuario }) => {
                         < tr key={index}>
                             <td style={{ width: '12rem', textAlign: 'left' }}>
                                 <b className="linkDoc" >
-                                    Nombre Cliente, ANONIMO
+                                    {cliente.nombre}
                                 </b>
                             </td>
                             { (tipoUsuario === 0) && (<td style={{ width: '4rem' }}>{cliente.sucursal}</td>)}

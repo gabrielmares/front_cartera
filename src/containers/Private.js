@@ -10,16 +10,12 @@ const PrivateRoute = ({ component: Component }) => {
     //hace una nueva verificacion de identidad
     // useAuth se usa cuando el usuario recarga la app, verifica con el backend
     // la identidad del usuario que tiene abierta la sesion
-
-    // para la version publica, BETA, se usa el localstorage para almacenar la sesion del usuario
-    const tokenLocal = window.localStorage.getItem('demo')
-
-    let q = useAuth(info, tokenLocal);
+    let q = useAuth(info);
     const { pending, claims } = q
 
     // cuando aun no tiene la informacion useAuth responde en true
     // cuando termina la consulta retorna false y la informacion del usuario
-
+    
     if (pending) return false;
     // cuando la sesion caduco o el token no es valido el servidor retorna
     // el msg 403, sirve de indicacion a la app para reenviar al usuario

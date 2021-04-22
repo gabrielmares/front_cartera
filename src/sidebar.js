@@ -2,7 +2,7 @@ export default {
     items: [
         {
             name: 'Principal',
-            url: '/app/inicio',
+            url: '/grameen/inicio',
             icon: "icon-home",
             rol: 7
         },
@@ -17,7 +17,7 @@ export default {
 
         // {
         //     name: "Programas",
-        //     url: "/app/programas",
+        //     url: "/grameen/programas",
         //     icon: "icon-share"
         // },
 
@@ -40,24 +40,24 @@ export default {
         },
         {
             name: 'Solicitudes',
-            url: '/app/solicitudes',
+            url: '/grameen/solicitudes',
             icon: 'icon-star',
             rol: 7
         },
         {
             name: "Renovaciones",
-            url: "/app/renovaciones",
+            url: "/grameen/renovaciones",
             icon: "icon-star",
             rol: 7
             // children: [
             //     {
             //         name: 'Futuras',
-            //         url: '/app/renovaciones/futuras',
+            //         url: '/grameen/renovaciones/futuras',
             //         icon: 'icon-star'
             //     },
             // {
             //     name: 'Procesadas',
-            //     url: '/app/renovaciones/procesadas',
+            //     url: '/grameen/renovaciones/procesadas',
             //     icon: 'icon-star'
 
             // },
@@ -65,7 +65,7 @@ export default {
             // },
             // {
             //     name: 'Universidades',
-            //     url: '/app/universidades',
+            //     url: '/grameen/universidades',
             //     icon: 'icon-graduation'
 
         },
@@ -73,6 +73,15 @@ export default {
             divider: true,
             rol: 7
         },
+        {
+            name: 'Usuarios',
+            url: '/grameen/icons',
+            icon: 'cui-people',
+            rol: 0
+        },
+        // {
+        //     divider: true,
+        // },
 
         {
             title: true,
@@ -89,13 +98,13 @@ export default {
         },
         {
             name: 'Roles y Usuarios',
-            url: '/app/admon/users',
+            url: '/grameen/admon/users',
             icon: 'icon-note',
             rol: 1
         },
         {
             name: 'Configuracion',
-            url: '/app/admon/configuration',
+            url: '/grameen/admon/configuration',
             icon: 'icon-note',
             rol: 1
         },
@@ -107,7 +116,7 @@ export default {
         //     children: [
         //         {
         //             name: 'CoreUI Icons',
-        //             url: '/app/icons/coreui-icons',
+        //             url: '/grameen/icons/coreui-icons',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'info',
@@ -116,12 +125,12 @@ export default {
         //         },
         //         {
         //             name: 'Flags',
-        //             url: '/app/icons/flags',
+        //             url: '/grameen/icons/flags',
         //             icon: 'icon-star',
         //         },
         //         {
         //             name: 'Font Awesome',
-        //             url: '/app/icons/font-awesome',
+        //             url: '/grameen/icons/font-awesome',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'secondary',
@@ -130,20 +139,20 @@ export default {
         //         },
         //         {
         //             name: 'Simple Line Icons',
-        //             url: '/app/icons/simple-line-icons',
+        //             url: '/grameen/icons/simple-line-icons',
         //             icon: 'icon-star',
         //         },
         //     ],
         // }
         // {
         //   name: 'Charts',
-        //   url: '/app/icons',
+        //   url: '/grameen/icons',
         //   icon: 'icon-pie-chart',
         // }
         // // },
         // {
         //     name: 'Icons',
-        //     url: '/app/iconos',
+        //     url: '/grameen/iconos',
         //     icon: 'icon-star',
         //     children: [
         //         {
@@ -202,7 +211,7 @@ export default {
         // },
         {
             name: 'Widgets',
-            url: '/app/widgets',
+            url: '/grameen/widgets',
             icon: 'icon-calculator',
             rol: 1
         },
