@@ -73,15 +73,6 @@ export default {
             divider: true,
             rol: 7
         },
-        {
-            name: 'Usuarios',
-            url: '/app/icons',
-            icon: 'cui-people',
-            rol: 0
-        },
-        // {
-        //     divider: true,
-        // },
 
         {
             title: true,

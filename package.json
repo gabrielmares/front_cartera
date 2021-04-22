@@ -38,8 +38,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "public:env": "env-cmd -f .env.public npm run start",
     "build": "react-scripts build",
     "build:env": "env-cmd -f .env npm run build",
+    "public:env": "env-cmd -f .env.public npm run build",
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",

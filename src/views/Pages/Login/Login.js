@@ -25,6 +25,10 @@ const Login = (props) => {
   });
 
 
+  // funciones usadas en el entorno de produccion
+  // se deshabilito el hook de inicio de sesion
+  // por no poderse condicionar
+
   // revisamos si ya hay una sesion abierta en el navegador
   let { pending, claims } = useAuth();
 
@@ -39,8 +43,20 @@ const Login = (props) => {
   const { email, password } = user;
 
   // funcion para iniciar sesion, envia los datos al backend para firmar el token
+
   const LoginUser = async (e) => {
     e.preventDefault();
+    if (process.env.REACT_APP_JSON === 'TRUE' && email === 'demo@demo.com' && password === 'publico') {
+      window.localStorage.setItem('demo', true)
+      return LayOut({
+        email: 'demo@demo.com',
+        nombre: 'Demostracion',
+        rol: 3,
+        sucursal: 0
+      })
+    }
+
+
     if (email.trim() === "" || password.trim() === "") {
       return alert("Todos los campos son obligatorios");
     }
@@ -48,6 +64,7 @@ const Login = (props) => {
 
     if (login.data.info) {
       let { data: { user } } = login
+      console.log(user)
       return LayOut(user);
     }
 

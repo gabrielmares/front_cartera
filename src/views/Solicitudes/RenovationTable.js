@@ -7,6 +7,10 @@ const RequestTable = ({ info, show, hide }) => {
 
     const handlePrint = async CODIGO => {
         hide(!show)
+        if (process.env.REACT_APP_JSON === 'TRUE') {
+            hide(false)
+            return alert('Esta funcionalidad esta deshabilitada en el DEMO')
+        }
         try {
             const nuevaSolicitud = await axios.get(`${process.env.REACT_APP_SERVIDOR}/api/operaciones/renovacion`, {
                 withCredentials: true,
@@ -41,13 +45,13 @@ const RequestTable = ({ info, show, hide }) => {
                         < tr key={index} >
                             <td style={{ width: '18rem', textAlign: 'left' }}>
                                 <b className="linkDoc" onClick={(cliente.PORPAGADO <= 85) ? (null) : (() => handlePrint(cliente.CODIGO))}>
-                                    {cliente.NOMBRE}
+                                    {(cliente.PORPAGADO <= 85) ? ('Cliente aun no puede renovar') : ('Credito renovable')}
                                 </b>
                             </td>
                             <td style={{ width: '4rem' }}>{cliente.CENTRO}</td>
                             <td style={{ width: '4rem' }}>{cliente.GRUPO}</td>
-                            <td style={{ width: '9rem' }}>{cliente.CONTRATO}, ${(cliente.SALDO).toFixed(2)}</td>
-                            <td style={{ width: '6rem' }}>{(cliente.PORPAGADO).toFixed(2)} %</td>
+                            <td style={{ width: '9rem' }}>No Mostrado, ${parseFloat(cliente.SALDO).toFixed(2)}</td>
+                            <td style={{ width: '6rem' }}>{parseFloat(cliente.PORPAGADO).toFixed(2)} %</td>
                             <td style={{ width: '9rem' }}>{cliente.ULTIMO}</td>
                             <td style={{ width: '9rem' }}>{cliente.VENCIMIENTO}</td>
                         </tr>
