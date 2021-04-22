@@ -10,7 +10,7 @@
     "@coreui/react": "^2.5.8",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",

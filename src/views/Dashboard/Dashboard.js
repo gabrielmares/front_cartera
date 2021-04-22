@@ -87,12 +87,12 @@ const Dashboard = () => {
   // si da clic en el cuadro de sucursales, lo reenvia a la vista donde se muestra el total de solicitudes por sucursal
   const renovationsTo = (lista) => {
     setRenovations(lista)
-    return history.push('/grameen/renovaciones');
+    return history.push('/app/renovaciones');
   }
 // al dar clic a las solicitudes por sucursal, te reenvia a la vista y carga el componente en el state para ser desplegado
   const requestsTo = (lista) => {
     setRequestBySuc(lista);
-    return history.push('/grameen/solicitudes')
+    return history.push('/app/solicitudes')
   }
 
 

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Button } from 'reactstrap';
 import img from "../Login/grameen.png";
+import logoPublico from '../Login/public.png'
 import PrivateRoute from '../../../containers/Private'
 import axiosClient from '../../../helpers/axiosClient'
 import { useAuth } from '../../../helpers/Helpers'
@@ -14,8 +15,8 @@ const Login = (props) => {
   let { setInfo } = useContext(usuarioContext)
   const LayOut = (claims) => {
     setInfo(claims)
-    history.push('/grameen/inicio');
-    return <PrivateRoute path="/grameen/inicio" component={<DefaultLayout usuario={claims} />} />
+    history.push('/app/inicio');
+    return <PrivateRoute path="/app/inicio" component={<DefaultLayout usuario={claims} />} />
   }
 
   const [user, saveuser] = useState({
@@ -93,22 +94,17 @@ const Login = (props) => {
                       </InputGroupAddon>
                       <Input type="password" name="password" id="password" value={password} placeholder="Contraseña" onChange={e => _onChange(e)} autoComplete="current-password" />
                     </InputGroup>
-                    <Row>
-
-                      <CardBody className="text-center">
-                        <div>
-
-                          <button type="submit" className="btn btn-primary" onClick={e => LoginUser(e)}>Entrar</button>
-                        </div>
-                      </CardBody>
-
+                    <Row className='justify-content-center pt-4'>
+                      <Col>
+                        <Button size='md' block color='primary' onClick={e => LoginUser(e)}>Entrar</Button>
+                      </Col>
                     </Row>
                   </Form>
                 </CardBody>
               </Card>
               <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
-                  <CardImg top width="10%" src={img} alt="Grameen AC" />
+                  <CardImg top width="10%" src={logoPublico || img} alt="Logo_empresa" />
 
                 </CardBody>
               </Card>
