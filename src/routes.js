@@ -9,11 +9,11 @@ const Config = React.lazy(() => import('./views/Solicitudes/Configuration'));
 
 
 const routes = [
-  { path: '/grameen/inicio', exact: true, component: Dashboard, rol: 7 },
-  { path: '/grameen/renovaciones', exact: true, component: Renovaciones, rol: 7 },
-  { path: '/grameen/solicitudes', exact: true, component: Solicitudes, rol: 7 },
-  { path: '/grameen/admon/users', exact: true, component: Users, rol: 1 },
-  { path: '/grameen/admon/configuration', exact: true, component: Config, rol: 1 }
+  { path: '/app/inicio', exact: true, component: Dashboard, rol: 7 },
+  { path: '/app/renovaciones', exact: true, component: Renovaciones, rol: 7 },
+  { path: '/app/solicitudes', exact: true, component: Solicitudes, rol: 7 },
+  { path: '/app/admon/users', exact: true, component: Users, rol: 1 },
+  { path: '/app/admon/configuration', exact: true, component: Config, rol: 1 }
 ];
 
 export default routes;

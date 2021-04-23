@@ -50,7 +50,7 @@ const Renovacion = () => {
                         params: {
                             FINNOSUCURSAL: FINNOSUCURSAL,
                             CENTRO: centro ? (centro) : (0),
-                            DESDE: from ? (from) : (CambiarFecha(sumaFechas(new Date(), -14))), 
+                            DESDE: from ? (from) : (CambiarFecha(sumaFechas(new Date(), -14))),
                             HASTA: to ? (to) : (CambiarFecha(Date.now()))
                         }
                     })
@@ -116,7 +116,7 @@ const Renovacion = () => {
         setRequestBySuc(toRequest)
     }
 
-// pasa las solicitues globales al state local
+    // pasa las solicitues globales al state local
     if (requestBySuc.length > 0 && toRequest.length === 0) {
 
         return setSubmit({

@@ -55,6 +55,7 @@ export function sumaFechas(fecha, dias) {
 // almacenado el token firmado
 export const useAuth = (data) => { 
 
+
     const [get, setGet] = useState({
         claims: null,
         pending: true
@@ -62,6 +63,15 @@ export const useAuth = (data) => {
     //si se actualiza la pagina, hace la llamada al backend con las credenciales en la cabecera
     // de la peticion, si el token esta vencido, se recibe un codigo 403
     useEffect(() => {
+        if (local) return setGet({
+            claims: {
+                email: 'demo@demo.com',
+                nombre: 'Demostracion',
+                rol: 3,
+                sucursal: 0
+            },
+            pending: false
+        })
         if (!data) {
             axiosClient.get('/api/currentuser')
                 .then(info => {
