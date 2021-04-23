@@ -8,7 +8,7 @@ class Collapses extends Component {
     this.onEntering = this.onEntering.bind(this);
     this.onEntered = this.onEntered.bind(this);
     this.onExiting = this.onExiting.bind(this);
-    this.onExited = this.onExited.bind(this);
+    this.onExited = this.onExited.bind(this); 
     this.toggle = this.toggle.bind(this);
     this.toggleAccordion = this.toggleAccordion.bind(this);
     this.toggleCustom = this.toggleCustom.bind(this);

@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader, Col, Dropdown, DropdownItem, DropdownMenu, 
 class Dropdowns extends Component {
   constructor(props) {
     super(props);
-
+ 
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: new Array(6).fill(false),

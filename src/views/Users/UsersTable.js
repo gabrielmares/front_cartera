@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Button, ButtonGroup, Table } from 'reactstrap'
 
 const UsersTable = ({ users }) => {

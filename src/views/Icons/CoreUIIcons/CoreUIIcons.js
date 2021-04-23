@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Badge, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 class CoreUIIcons extends Component {
-  render() {
+  render() { 
     return (
       <div className="animated fadeIn">
         <Card>

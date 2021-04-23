@@ -5,7 +5,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 const line = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
+  datasets: [ 
     {
       label: 'My First dataset',
       fill: false,

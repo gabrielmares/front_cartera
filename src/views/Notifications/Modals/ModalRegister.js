@@ -5,7 +5,7 @@ import axiosClient from '../../../helpers/axiosClient';
 
 
 const Modals = ({ show, hide }) => {
-    let history = useHistory();
+    let history = useHistory(); 
     const [user, setUser] = React.useState({
         nombre: '',
         email: "",

@@ -11,7 +11,7 @@ class ButtonDropdowns extends Component {
       dropdownOpen: new Array(19).fill(false),
     };
   }
-
+ 
   toggle(i) {
     const newArray = this.state.dropdownOpen.map((element, index) => { return (index === i ? !element : false); });
     this.setState({

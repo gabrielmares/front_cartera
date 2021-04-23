@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const Modals = ({ msg, action, header, type }) => {
-  console.log(msg)
   const [modal, setModal] = React.useState(true)
 
   const toggleDanger = (e) => {

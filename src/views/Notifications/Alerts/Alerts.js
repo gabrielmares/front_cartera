@@ -7,7 +7,7 @@ class Alerts extends Component {
 
     this.state = {
       visible: true,
-    };
+    }; 
 
     this.onDismiss = this.onDismiss.bind(this);
   }

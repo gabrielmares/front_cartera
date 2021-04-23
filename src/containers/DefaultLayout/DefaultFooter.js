@@ -5,7 +5,7 @@ const propTypes = {
   children: PropTypes.node,
 };
 
-const defaultProps = {};
+const defaultProps = {}; 
 
 class DefaultFooter extends Component {
   render() {

@@ -6,7 +6,7 @@ class Page500 extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
-          <Row className="justify-content-center">
+          <Row className="justify-content-center"> 
             <Col md="6">
               <span className="clearfix">
                 <h1 className="float-left display-3 mr-4">500</h1>

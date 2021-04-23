@@ -45,8 +45,8 @@ export default {
             rol: 7
         },
         {
-            name: "Renovaciones",
-            url: "/app/renovaciones",
+            name: "Renovaciones", 
+            url: "/grameen/renovaciones",
             icon: "icon-star",
             rol: 7
             // children: [

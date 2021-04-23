@@ -3,7 +3,7 @@ import React from 'react';
 
 const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Users = React.lazy(() => import('./views/Users/Users'));
-const Renovaciones = React.lazy(() => import('./views/Solicitudes/Renovations'));
+const Renovaciones = React.lazy(() => import('./views/Solicitudes/Renovations')); 
 const Solicitudes = React.lazy(() => import('./views/Solicitudes/RequestsInProcess'))
 const Config = React.lazy(() => import('./views/Solicitudes/Configuration'));
 

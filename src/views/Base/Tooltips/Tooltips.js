@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardHeader, Tooltip, UncontrolledTooltip } from 'reactstrap';
 
 class TooltipItem extends React.Component {
-  constructor(props) {
+  constructor(props) { 
     super(props);
 
     this.toggle = this.toggle.bind(this);

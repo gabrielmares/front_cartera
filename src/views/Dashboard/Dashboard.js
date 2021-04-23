@@ -143,7 +143,8 @@ const Dashboard = () => {
         </Col>) : (null)}
 
 
-        {(info.sucursal === 3 || info.sucursal === 0) && (<Col xs="12" sm="6" lg="3">
+        {(info.sucursal === 3 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3">
+
           <Card className="text-white bg-info">
             <CardBody>
               <h4>Navojoa</h4>
@@ -159,7 +160,7 @@ const Dashboard = () => {
               </NavLink>
             </CardBody>
           </Card>
-        </Col>) }
+        </Col>) : (null) }
 
 
       </Row>

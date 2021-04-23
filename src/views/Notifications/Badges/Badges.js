@@ -4,7 +4,7 @@ import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Col, Row } from 
 class Badges extends Component {
   render() {
     return (
-      <div className="animated fadeIn">
+      <div className="animated fadeIn"> 
         <Row>
           <Col xs="12" md="6">
             <Card>

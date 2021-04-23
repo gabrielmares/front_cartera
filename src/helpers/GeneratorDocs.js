@@ -1,7 +1,7 @@
 import { TemplateHandler } from 'easy-template-x'
 import { ParseDate } from './Helpers'
 
-// siguiendo el ejemplo de la libreria easy-template-x
+// siguiendo el ejemplo de la libreria easy-template-x 
 async function generateDoc(cliente) {
     const { edoResidencia: { EDORESIDENCIA }, munResidencia: { MUNRESIDENCIA }, pobResidencia: { POBRESIDENCIA },
         generales, familiar, ColResidencia: { COLRESIDENCIA }, nacestado: { EDONACIMIENTO }, actividad, credito: { MONTO }, vendedor } = cliente;

@@ -4,7 +4,7 @@ import RequestTable from './RenovationTable';
 import DangerModal from '../Notifications/Modals/Modals';
 import SpinnerModal from '../Notifications/Modals/SpinnerModal'
 import { Inputdate, CambiarFecha, sumaFechas } from '../../helpers/Helpers'
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'; 
 import axiosClient from '../../helpers/axiosClient';
 import { usuarioContext } from '../../provider/contextUsers'
 import InputsFilters from './components/InputsFilters'

@@ -5,7 +5,7 @@ import {mount} from 'enzyme/build';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Navs />, div);
+  ReactDOM.render(<Navs />, div); 
   ReactDOM.unmountComponentAtNode(div);
 });
 it('toggle click without crashing', () => {

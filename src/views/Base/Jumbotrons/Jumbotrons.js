@@ -5,7 +5,7 @@ class Jumbotrons extends Component {
 
   render() {
     return (
-      <div className="animated fadeIn">
+      <div className="animated fadeIn"> 
         <Row>
           <Col>
             <Card>

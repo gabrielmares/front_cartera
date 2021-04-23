@@ -1,4 +1,4 @@
-import Alerts from './Alerts';
+ import Alerts from './Alerts';
 import Badges from './Badges';
 import Modals from './Modals';
 

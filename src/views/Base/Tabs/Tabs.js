@@ -6,7 +6,7 @@ class Tabs extends Component {
 
   constructor(props) {
     super(props);
-
+ 
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: new Array(4).fill('1'),

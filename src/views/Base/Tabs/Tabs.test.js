@@ -4,7 +4,7 @@ import Tabs from './Tabs';
 import {mount} from 'enzyme/build';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
+  const div = document.createElement('div'); 
   ReactDOM.render(<Tabs />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

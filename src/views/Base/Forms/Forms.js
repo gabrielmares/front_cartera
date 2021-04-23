@@ -6,7 +6,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Col,
+  Col, 
   Collapse,
   DropdownItem,
   DropdownMenu,
