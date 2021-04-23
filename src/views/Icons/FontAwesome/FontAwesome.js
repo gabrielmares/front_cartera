@@ -3691,7 +3691,7 @@ class FontAwesome extends Component {
               </Col>
 
             </Row>
-          </CardBody>
+          </CardBody> 
         </Card>
       </div>
 

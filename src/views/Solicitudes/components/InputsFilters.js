@@ -7,7 +7,7 @@ const InputFilter = ({ handleSubmit }) => {
 
     // const { toRequest } = submit;
     const { info, form, setForm, spin } = useContext(usuarioContext)
-
+ 
     // variables globales de filtros por sucursales
     const { FINNOSUCURSAL, centro, from, to } = form
 

@@ -60,7 +60,7 @@ class DefaultAside extends Component {
                      }}>
               <i className="icon-settings"></i>
             </NavLink>
-          </NavItem>
+          </NavItem> 
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">

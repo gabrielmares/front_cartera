@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardHeader, Popover, PopoverBody, PopoverHeader
 
 class PopoverItem extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
     this.toggle = this.toggle.bind(this);
     this.state = {

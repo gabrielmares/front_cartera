@@ -12,7 +12,7 @@ class Cards extends Component {
       collapse: true,
       fadeIn: true,
       timeout: 300
-    };
+    }; 
   }
 
   toggle() {

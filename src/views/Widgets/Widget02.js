@@ -12,7 +12,7 @@ const propTypes = {
   variant: PropTypes.string,
   footer: PropTypes.bool,
   link: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node, 
   className: PropTypes.string,
   cssModule: PropTypes.object,
 };

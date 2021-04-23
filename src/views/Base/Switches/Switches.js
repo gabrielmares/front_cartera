@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { AppSwitch } from '@coreui/react'
 
 class Switches extends Component {
-  render() {
+  render() { 
     return (
       <div className="animated fadeIn">
 

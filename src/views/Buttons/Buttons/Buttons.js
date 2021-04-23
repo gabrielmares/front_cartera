@@ -9,7 +9,7 @@ class Buttons extends Component {
           <CardHeader>
             <strong>Standard Buttons</strong>
           </CardHeader>
-          <CardBody>
+          <CardBody> 
             <Row className="align-items-center">
               <Col col="12" xl className="mb-3 mb-xl-0">
                 Normal

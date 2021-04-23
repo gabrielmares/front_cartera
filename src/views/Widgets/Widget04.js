@@ -8,7 +8,7 @@ const propTypes = {
   header: PropTypes.string,
   icon: PropTypes.string,
   color: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.string, 
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,

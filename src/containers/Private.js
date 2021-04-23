@@ -25,7 +25,7 @@ const PrivateRoute = ({ component: Component }) => {
 
     // cuando refresca la app se le reasignan los claims a info
     // el state global, para manejar la informacion del usuario
-    if (!info) {
+    if (!info) { 
         setInfo(claims)
     }
 

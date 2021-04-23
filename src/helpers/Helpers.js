@@ -53,7 +53,7 @@ export function sumaFechas(fecha, dias) {
 
 // solicita al backend la informacion del usuario, la sesion actual, en las cookies se encuentra
 // almacenado el token firmado
-export const useAuth = (data) => {
+export const useAuth = (data) => { 
 
     const [get, setGet] = useState({
         claims: null,

@@ -50,7 +50,7 @@ const RequestTable = ({ info, show, hide }) => {
                             <td style={{ width: '6rem' }}>{(cliente.PORPAGADO).toFixed(2)} %</td>
                             <td style={{ width: '9rem' }}>{cliente.ULTIMO}</td>
                             <td style={{ width: '9rem' }}>{cliente.VENCIMIENTO}</td>
-                        </tr>
+                        </tr> 
                     ))}
                 </tbody>
             </Table>

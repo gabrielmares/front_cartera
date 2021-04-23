@@ -40,7 +40,7 @@ const Login = (props) => {
   // funcion para iniciar sesion, envia los datos al backend para firmar el token
   const LoginUser = async (e) => {
     e.preventDefault();
-    if (email.trim() === "" || password.trim() === "") {
+    if (email.trim() === "" || password.trim() === "") { 
       return alert("Todos los campos son obligatorios");
     }
     let login = await axiosClient.post("/api/signin", user);

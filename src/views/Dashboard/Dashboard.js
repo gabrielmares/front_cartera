@@ -137,7 +137,7 @@ const Dashboard = () => {
           </Card>
         </Col>) : (null)}
 
-
+ 
         {(info.sucursal === 3 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3">
           <Card className="text-white bg-info">
             <CardBody>

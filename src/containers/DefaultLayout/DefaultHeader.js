@@ -16,7 +16,7 @@ const DefaultHeader = ({ usuario }) => {
   const signOut = async (e) => {
     e.preventDefault()
     await axiosClient.get('/api/logout');
-    history.push('/');
+    history.push('/'); 
   }
 
 

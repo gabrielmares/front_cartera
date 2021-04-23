@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 class Paginations extends Component {
-
+ 
   render() {
     return (
       <div className="animated fadeIn">

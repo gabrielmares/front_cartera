@@ -4,7 +4,6 @@ import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { usuarioContext } from '../../provider/contextUsers'
 import {
-  // AppAside,
   AppHeader,
   AppSidebar,
   AppSidebarFooter,

@@ -4,7 +4,7 @@ import Collapses from './Collapses';
 import {mount} from 'enzyme/build';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
+  const div = document.createElement('div'); 
   ReactDOM.render(<Collapses />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Dropdown, DropdownItem, DropdownMenu, Dropd
 
 class Navs extends Component {
 
-  constructor(props) {
+  constructor(props) { 
     super(props);
 
     this.toggle = this.toggle.bind(this);

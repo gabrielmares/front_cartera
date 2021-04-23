@@ -6,7 +6,7 @@ const SpinnerModal = ({ modal }) => {
     setInterval(() => {
         console.log('modal')
     }, 3000);
-
+ 
 
     return (
         <div className="animated fadeIn justify-content-center">
