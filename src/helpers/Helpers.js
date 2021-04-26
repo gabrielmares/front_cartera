@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import axiosClient from '../helpers/axiosClient';
 
 export function Inputdate(fecnac) {
@@ -51,47 +50,6 @@ export function sumaFechas(fecha, dias) {
     return fecha
 }
 
-// solicita al backend la informacion del usuario, la sesion actual, en las cookies se encuentra
-// almacenado el token firmado
-export const useAuth = (data) => {
-
-    const [get, setGet] = useState({
-        claims: null,
-        pending: true
-    })
-    //si se actualiza la pagina, hace la llamada al backend con las credenciales en la cabecera
-    // de la peticion, si el token esta vencido, se recibe un codigo 403
-    useEffect(() => {
-        if (!data) {
-            axiosClient.get('/api/currentuser')
-                .then(info => {
-                    if (info.data.info) {
-                        setGet({
-                            claims: info.data.user,
-                            isSignedIn: true,
-                            pending: false
-                        })
-                    } else {
-                        setGet({
-                            claims: info.data.codigo,
-                            isSignedIn: false,
-                            pending: false
-                        })
-                    }
-                })
-        }
-        else {
-            setGet({
-                claims: null,
-                pending: false
-            })
-        }
-        // eslint-disable-next-line
-    }, [])
-    return get;
-}
-
-
 
 export const updateUser = (info) => {
     if (!info.email) return false;
@@ -115,4 +73,8 @@ export const disable = (email) => {
         .then((user) => {
             console.log(user);
         })
+}
+
+export const logOut = () => {
+    axiosClient.get('/logout');
 }
