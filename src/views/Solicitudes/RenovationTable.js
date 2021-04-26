@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table } from 'reactstrap'
 import axios from 'axios'
 import generateDoc from '../../helpers/GeneratorDocs'
+import { usuarioContext } from '../../Context/contextUsers';
+import { QUITAR_LOADER } from '../../Context/types';
 
-const RequestTable = ({ info, show, hide }) => {
+const RequestTable = ({ info, hide }) => {
+
+    const { loader, dispatch } = useContext(usuarioContext)
 
     const handlePrint = async CODIGO => {
-        hide(!show)
+        hide(!loader)
         try {
             const nuevaSolicitud = await axios.get(`${process.env.REACT_APP_SERVIDOR}/api/operaciones/renovacion`, {
                 withCredentials: true,
@@ -14,25 +18,27 @@ const RequestTable = ({ info, show, hide }) => {
                     CODIGO
                 },
             })
-            generateDoc(nuevaSolicitud.data).then(() => hide(false));
+            generateDoc(nuevaSolicitud.data).then(() => dispatch({
+                type: QUITAR_LOADER
+            }));
         } catch (error) {
             console.log(error)
             alert('sucedio un error al generar el archivo')
-            hide(!show)
+            hide(!loader)
         }
     }
     return (
         <>
-            <Table size='lg' responsive striped className="justify-content-center tablarenovaciones" aria-disabled={show}>
+            <Table size='lg' responsive striped className="justify-content-center tablarenovaciones" aria-disabled={loader}>
                 <thead className="text-center" style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>
                     <tr>
-                        <th style={{ width: '18rem' }}>Nombre</th>
-                        <th style={{ width: '4rem' }}>Centro</th>
-                        <th style={{ width: '4rem' }}>Grupo</th>
-                        <th style={{ width: '8rem' }}> Contrato y Saldo </th>
-                        <th style={{ width: '6rem' }}> Pagado</th>
-                        <th style={{ width: '9rem' }}>Ultimo Abono</th>
-                        <th style={{ width: '9rem' }}>Vencimiento del Contrato</th>
+                        <th style={{ width: '18rem' }} >Nombre</th>
+                        <th >Centro</th>
+                        <th >Grupo</th>
+                        <th style={{ width: '9em'}}  >Contrato</th>
+                        <th >Saldo</th>
+                        <th style={{ width: '8em'}}  >Ult. Abono</th>
+                        <th style={{ width: '8em', textAlign: 'right' }}  >Vencimiento</th>
                     </tr>
                 </thead>
 
@@ -44,12 +50,12 @@ const RequestTable = ({ info, show, hide }) => {
                                     {cliente.NOMBRE}
                                 </b>
                             </td>
-                            <td style={{ width: '4rem' }}>{cliente.CENTRO}</td>
-                            <td style={{ width: '4rem' }}>{cliente.GRUPO}</td>
-                            <td style={{ width: '9rem' }}>{cliente.CONTRATO}, ${(cliente.SALDO).toFixed(2)}</td>
-                            <td style={{ width: '6rem' }}>{(cliente.PORPAGADO).toFixed(2)} %</td>
-                            <td style={{ width: '9rem' }}>{cliente.ULTIMO}</td>
-                            <td style={{ width: '9rem' }}>{cliente.VENCIMIENTO}</td>
+                            <td >{cliente.CENTRO}</td>
+                            <td >{cliente.GRUPO}</td>
+                            <td style={{ width: '8em' }}  >{cliente.CONTRATO}</td>
+                            <td >{Math.floor(cliente.SALDO)}</td>
+                            <td style={{ width: '8em' }} >{cliente.ULTIMO}</td>
+                            <td style={{ width: '8em' }} >{cliente.VENCIMIENTO}</td>
                         </tr>
                     ))}
                 </tbody>
