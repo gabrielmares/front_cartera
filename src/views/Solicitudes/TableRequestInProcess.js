@@ -1,4 +1,4 @@
- import React from 'react'
+import React, { useContext } from 'react'
 import { Table } from 'reactstrap'
 import { usuarioContext } from '../../Context/contextUsers'
 
@@ -49,7 +49,7 @@ const Solicitudes = () => {
                         <th >Centro</th>
                         <th >Grupo</th>
                         <th >Solicitado</th>
-                        <th style={{ width: '6.5em'}} > Plazo </th>
+                        <th style={{ width: '6.5em' }} > Plazo </th>
                         <th style={{ width: '9.5em', textAlign: 'right' }} >Documentacion</th>
                     </tr>
                 </thead>
@@ -66,7 +66,7 @@ const Solicitudes = () => {
                             <td >{cliente.centro}</td>
                             <td >{cliente.grupo}</td>
                             <td >{cliente.montosol}</td>
-                            <td  style={{ width: '6.5em' }} >{plazo(parseInt(cliente.plazo))}</td>
+                            <td style={{ width: '6.5em' }} >{plazo(parseInt(cliente.plazo))}</td>
                             <td style={{ width: '9.5em' }}>{docs([cliente.solicitud, cliente.comprobante, cliente.ine, cliente.aviso])}%</td>
                         </tr>
                     ))}

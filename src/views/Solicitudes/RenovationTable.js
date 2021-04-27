@@ -3,14 +3,16 @@ import { Table } from 'reactstrap'
 import axios from 'axios'
 import generateDoc from '../../helpers/GeneratorDocs'
 import { usuarioContext } from '../../Context/contextUsers';
-import { QUITAR_LOADER } from '../../Context/types';
+import { LLAMADA_API, QUITAR_LOADER } from '../../Context/types';
 
 const RequestTable = () => {
 
     const { loader, dispatch, renovations } = useContext(usuarioContext)
 
     const handlePrint = async CODIGO => {
-        hide(!loader)
+        dispatch({
+            type: LLAMADA_API
+        })
         try {
             const nuevaSolicitud = await axios.get(`${process.env.REACT_APP_SERVIDOR}/api/operaciones/renovacion`, {
                 withCredentials: true,
@@ -22,9 +24,12 @@ const RequestTable = () => {
                 type: QUITAR_LOADER
             }));
         } catch (error) {
-            console.log(error)
+            dispatch({
+                type: QUITAR_LOADER
+            })
+
             alert('sucedio un error al generar el archivo')
-            hide(!loader)
+
         }
     }
     return (
@@ -35,9 +40,9 @@ const RequestTable = () => {
                         <th style={{ width: '18rem' }} >Nombre</th>
                         <th >Centro</th>
                         <th >Grupo</th>
-                        <th style={{ width: '9em'}}  >Contrato</th>
+                        <th style={{ width: '9em' }}  >Contrato</th>
                         <th >Saldo</th>
-                        <th style={{ width: '8em'}}  >Ult. Abono</th>
+                        <th style={{ width: '8em' }}  >Ult. Abono</th>
                         <th style={{ width: '8em', textAlign: 'right' }}  >Vencimiento</th>
                     </tr>
                 </thead>

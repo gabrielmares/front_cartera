@@ -74,7 +74,6 @@ const Dashboard = () => {
   // con solicitudes y renovaciones por sucursal
   const [loading, setLoading] = React.useState(true)
   React.useEffect(() => {
-    if (process.env.REACT_APP_JSON === 'TRUE') return solicitudesPorSucursal(JsonServer)
     axiosClient.get('/api/operaciones/totales', {
       params: {
         sucursal: info.sucursal

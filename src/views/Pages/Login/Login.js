@@ -4,7 +4,6 @@ import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputG
 import img from "../Login/grameen.png";
 import PrivateRoute from '../../../containers/Private'
 import { usuarioContext } from '../../../Context/contextUsers';
-import Button from 'reactstrap/lib/Button';
 import SpinnerModal from '../../Notifications/Modals/SpinnerModal';
 import { FALLO_INICIO_SESION, INICIAR_SESION, INICIO_SESION_EXITOSO } from '../../../Context/types';
 import { LoginFn } from '../../../helpers/LoginFn';
