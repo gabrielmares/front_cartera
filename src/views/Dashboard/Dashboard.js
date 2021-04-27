@@ -31,8 +31,7 @@ const Dashboard = () => {
     requests: []
   })
 
-  const solicitudesPorSucursal = (totales) => {
-    console.log(info, totales)
+  const filtrarSucursales = (totales) => {
     switch (info.sucursal) {
       case 0:
         setObregon({
@@ -80,8 +79,9 @@ const Dashboard = () => {
         sucursal: info.sucursal
       }
     }).then(totales => {
-      solicitudesPorSucursal(totales)
+      filtrarSucursales(totales)
       return setLoading(false);
+
     })
     // eslint-disable-next-line
   }, [info])
