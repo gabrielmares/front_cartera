@@ -1,8 +1,11 @@
- import React from 'react'
+import React, { useContext } from 'react'
 import { Table } from 'reactstrap'
+import { usuarioContext } from '../../Context/contextUsers'
 
 
-const Solicitudes = ({ rows, tipoUsuario }) => {
+const Solicitudes = () => {
+
+    const { info, requests } = useContext(usuarioContext)
 
     // funcion que vuelve legible al usuario el plazo de las solicitudes de credito
     let plazo = (amortizaciones) => {
@@ -41,31 +44,30 @@ const Solicitudes = ({ rows, tipoUsuario }) => {
             <Table size='lg' responsive striped className="justify-content-center tablarenovaciones" >
                 <thead className="text-center" style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>
                     <tr>
-                        <th style={{ width: '12rem' }}>Nombre</th>
-                        {(tipoUsuario === 0) && (<th style={{ width: '4rem' }}>Sucursal</th>)}
-                        <th style={{ width: '4rem' }}>Centro</th>
-                        <th style={{ width: '4rem' }}>Grupo</th>
-                        <th style={{ width: '4rem' }}>Solicitado</th>
-                        <th style={{ width: '4rem' }}> Plazo </th>
-                        <th style={{ width: '4rem' }}>Documentacion</th>
-
+                        <th style={{ width: '16rem' }}>Nombre</th>
+                        {(info?.rol < 4) && (<th >Sucursal</th>)}
+                        <th >Centro</th>
+                        <th >Grupo</th>
+                        <th >Solicitado</th>
+                        <th style={{ width: '6.5em' }} > Plazo </th>
+                        <th style={{ width: '9.5em', textAlign: 'right' }} >Documentacion</th>
                     </tr>
                 </thead>
 
                 <tbody className="text-center" >
-                    {rows.map((cliente, index) => (
+                    {requests.map((cliente, index) => (
                         < tr key={index}>
-                            <td style={{ width: '12rem', textAlign: 'left' }}>
+                            <td style={{ width: '16rem', textAlign: 'left' }}>
                                 <b className="linkDoc" >
-                                    Nombre Cliente, ANONIMO
+                                    {cliente.nombre}
                                 </b>
                             </td>
-                            { (tipoUsuario === 0) && (<td style={{ width: '4rem' }}>{cliente.sucursal}</td>)}
-                            <td style={{ width: '4rem' }}>{cliente.centro}</td>
-                            <td style={{ width: '4rem' }}>{cliente.grupo}</td>
-                            <td style={{ width: '4rem' }}>{cliente.montosol}</td>
-                            <td style={{ width: '4rem' }}>{plazo(parseInt(cliente.plazo))}</td>
-                            <td style={{ width: '4rem' }}>{docs([cliente.solicitud, cliente.comprobante, cliente.ine, cliente.aviso])}%</td>
+                            { (info?.rol < 4) && (<td>{cliente.sucursal}</td>)}
+                            <td >{cliente.centro}</td>
+                            <td >{cliente.grupo}</td>
+                            <td >{cliente.montosol}</td>
+                            <td style={{ width: '6.5em' }} >{plazo(parseInt(cliente.plazo))}</td>
+                            <td style={{ width: '9.5em' }}>{docs([cliente.solicitud, cliente.comprobante, cliente.ine, cliente.aviso])}%</td>
                         </tr>
                     ))}
 

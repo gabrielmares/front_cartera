@@ -2,7 +2,7 @@ import React, { Suspense, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
-import { usuarioContext } from '../../provider/contextUsers'
+import { usuarioContext } from '../../Context/contextUsers'
 import {
   AppHeader,
   AppSidebar,
@@ -14,27 +14,25 @@ import {
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 import navigation from '../../sidebar';
-import routes from '../../routes';
+import routes from '../../RoutesDashBoard';
 
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
-const DefaultLayout = ({ usuario }) => {
-  let { info, setInfo } = useContext(usuarioContext);
+const DefaultLayout = () => {
+  let { info } = useContext(usuarioContext);
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-  if (info === null) {
-    setInfo(usuario)
-  }
+
 
   // filtrado de rutas por tipo tipo de usuario
-  let filterRoutes = routes.filter(route => route.rol >= info.rol)
+  let filterRoutes = routes.filter(route => route.rol >= info?.rol)
   let filterSidebar = {};
-  filterSidebar.items = navigation.items.filter(nav => nav.rol >= info.rol)
+  filterSidebar.items = navigation.items.filter(nav => nav.rol >= info?.rol)
 
   return (
     <div className="app">
       <AppHeader fixed>
         <Suspense fallback={loading()}>
-          <DefaultHeader usuario={usuario.nombre} />
+          <DefaultHeader usuario={info?.nombre} />
         </Suspense>
       </AppHeader>
       <div className="app-body">
@@ -66,7 +64,7 @@ const DefaultLayout = ({ usuario }) => {
                       )} />
                   )
                 })}
-                <Redirect to="/app/inicio" />
+                <Redirect to="/inicio" />
               </Switch>
             </Suspense>
           </Container>

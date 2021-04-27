@@ -2,72 +2,72 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Button } from 'reactstrap';
 import img from "../Login/grameen.png";
-import logoPublico from '../Login/public.png'
 import PrivateRoute from '../../../containers/Private'
-import axiosClient from '../../../helpers/axiosClient'
-import { useAuth } from '../../../helpers/Helpers'
-import { usuarioContext } from '../../../provider/contextUsers';
+import { usuarioContext } from '../../../Context/contextUsers';
+import SpinnerModal from '../../Notifications/Modals/SpinnerModal';
+import { FALLO_INICIO_SESION, INICIAR_SESION, INICIO_SESION_EXITOSO } from '../../../Context/types';
+import { LoginFn } from '../../../helpers/LoginFn';
 
 const DefaultLayout = React.lazy(() => import('../../../containers/DefaultLayout'));
 
-const Login = (props) => {
+const Login = () => {
   let history = useHistory();
-  let { setInfo } = useContext(usuarioContext)
-  const LayOut = (claims) => {
-    setInfo(claims)
-    history.push('/app/inicio');
-    return <PrivateRoute path="/app/inicio" component={<DefaultLayout usuario={claims} />} />
-  }
 
+  let { loader, dispatch } = useContext(usuarioContext)
+  const [errEmail, setErrEmail] = useState(false)
+  const [errPassword, setErrPassword] = useState(false)
   const [user, saveuser] = useState({
     password: "",
     email: ""
   });
 
 
-  // funciones usadas en el entorno de produccion
-  // se deshabilito el hook de inicio de sesion
-  // por no poderse condicionar
-
-  // revisamos si ya hay una sesion abierta en el navegador
-  let { pending, claims } = useAuth();
-
-  if (pending) return false;
-  // si habia sesion y caduco continuar con el proceso de loggeo,
-  // de otra manera,redirige a la pantalla de inicio
-  if (claims !== 403) {
-    return LayOut(claims);
-  }
-
-
   const { email, password } = user;
 
-  // funcion para iniciar sesion, envia los datos al backend para firmar el token
-
-  const LoginUser = async (e) => {
-    e.preventDefault();
-
-    if (email.trim() === "" || password.trim() === "") {
-      return alert("Todos los campos son obligatorios");
+  const IniciarSesion = async () => {
+    setErrEmail(false)
+    setErrPassword(false)
+    dispatch({
+      type: INICIAR_SESION
+    })
+    const callAPI = await LoginFn(email, password)
+    if (callAPI === 500) {
+      dispatch({
+        type: FALLO_INICIO_SESION
+      })
+      setErrPassword(true)
     }
-    let login = await axiosClient.post("/api/signin", user);
-
-    if (login.data.info) {
-      let { data: { user } } = login
-      console.log(user)
-      return LayOut(user);
+    if (callAPI === 501) {
+      dispatch({
+        type: FALLO_INICIO_SESION
+      })
+      setErrEmail(true)
     }
 
+    if (callAPI?.email) {
+      dispatch({
+        type: INICIO_SESION_EXITOSO,
+        payload: callAPI
+      })
+      history.push('/inicio')
+      return <PrivateRoute path="/inicio" name='Home' component={<DefaultLayout />} />
+    }
+
+    dispatch({
+      type: FALLO_INICIO_SESION
+    })
 
   }
-  const _onChange = e => {
+
+
+
+  const handleChange = e => {
     e.preventDefault();
     saveuser({
       ...user,
       [e.target.name]: e.target.value
     })
   }
-
 
 
   return (
@@ -85,33 +85,43 @@ const Login = (props) => {
                       </Col>
                     </Row>
                     <br />
-                    <InputGroup className="mb-3">
+                    <InputGroup className="mb-1">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" name="email" value={email} placeholder="Usuario" id="email" onChange={e => _onChange(e)} autoComplete="email" />
+                      <Input type="text" name="email" value={email} placeholder="Usuario" id="email" onChange={e => handleChange(e)} autoComplete="email" />
                     </InputGroup>
-                    <InputGroup className="mb-4">
+                    <div className='row justify-content-center mb-4'>
+                      {(errEmail) && <span className='text-center text-danger'>Usuario desconocido</span>}
+                    </div>
+                    <InputGroup className="mb-2">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" name="password" id="password" value={password} placeholder="Contraseña" onChange={e => _onChange(e)} autoComplete="current-password" />
+                      <Input type="password" name="password" id="password" value={password} placeholder="Contraseña" onChange={e => handleChange(e)} autoComplete="current-password" />
                     </InputGroup>
-                    <Row className='justify-content-center pt-4'>
-                      <Col>
-                        <Button size='md' block color='primary' onClick={e => LoginUser(e)}>Entrar</Button>
-                      </Col>
+                    <div className='row justify-content-center mb-4'>
+                      {(errPassword) && <span className='text-center text-danger'>Contraseña Incorrecta</span>}
+                    </div>
+                    <Row>
+
+                      <CardBody className="text-center">
+                        <div>
+                          <Button type="button" color='primary' block disabled={email.length === 0 && password.length === 0} onClick={() => IniciarSesion()}>Entrar</Button>
+                        </div>
+                      </CardBody>
+
                     </Row>
                   </Form>
                 </CardBody>
               </Card>
               <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
-                  <CardImg top width="10%" src={logoPublico || img} alt="Logo_empresa" />
+                  <CardImg top width="10%" src={img} alt="Grameen" />
 
                 </CardBody>
               </Card>
@@ -119,6 +129,9 @@ const Login = (props) => {
           </Col>
         </Row>
       </Container>
+      {loader && <SpinnerModal
+        mensaje='Iniciando sesion'
+      />}
     </div>
   );
 }

@@ -1,152 +1,89 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CardHeader, Col, Card } from 'reactstrap';
 import TableRequestInProcess from './TableRequestInProcess';
-import DangerModal from '../Notifications/Modals/Modals';
-import { CambiarFecha, sumaFechas } from '../../helpers/Helpers'
-import { useHistory } from 'react-router-dom';
-import axiosClient from '../../helpers/axiosClient';
-import { usuarioContext } from '../../provider/contextUsers'
+import { usuarioContext } from '../../Context/contextUsers'
 import InputsFilters from './components/InputsFilters'
+import { LISTA_SOLICITUDES_ENCERO, LISTA_SOLICITUDES_EXITOSO, LLAMADA_API_SOLICITUDES } from '../../Context/types';
+import SpinnerModal from '../Notifications/Modals/SpinnerModal';
+import useFetch from '../../hook/useFetch';
+import { useEffect } from 'react/cjs/react.development';
 
 const Renovacion = () => {
-    let history = useHistory();
-    // const [spin, setSpin] = React.useState(false)
 
-    const [modal, setModal] = React.useState(false);
-    const { form, requestBySuc, setRequestBySuc, info } = useContext(usuarioContext);
+    const { form, dispatch, requests, info, loader, endSession } = useContext(usuarioContext);
+    const { Sucursal } = form;
+    const endPoint = 'solicitudes'
+    const [trigger, setTrigger] = useState(false)
 
-
-    const { from, to, FINNOSUCURSAL, centro } = form;
-
-
-
-    //toRequest contiene las solicitudes a renovar, getInfo, cuando cambia a true hace la llamada a la api
-    // noRows previene el bloqueo del componente cuando no encuentra valores que mostrar
-    const [submit, setSubmit] = React.useState({
-        toRequest: [],
-        getInfo: false,
-        noRows: true
-    })
-
-    const { getInfo, noRows, toRequest } = submit;
-
-
-    function update(rows) {
-
-        setSubmit({
-            getInfo: false,
-            toRequest: rows,
-            noRows: false
-        });
-
-        return console.log('tablas actualizadas')
+    const exitoso = (rows) => {
+        dispatch({
+            type: LISTA_SOLICITUDES_EXITOSO,
+            payload: rows
+        })
+        setTrigger(false)
     }
 
-    React.useEffect(() => {
-        if (getInfo) {
-            const get = async () => {
-                try {
-                    let q = await axiosClient.get('/api/operaciones/solicitudes', {
-                        params: {
-                            FINNOSUCURSAL: FINNOSUCURSAL,
-                            CENTRO: centro ? (centro) : (0),
-                            DESDE: from ? (from) : (CambiarFecha(sumaFechas(new Date(), -14))),
-                            HASTA: to ? (to) : (CambiarFecha(Date.now()))
-                        }
-                    })
-                    if (q.data.codigo === 403) {
-                        // mostramos modal que notifica al usuario que las credenciales estan vencidas
-                        setModal(true)
-                    } else if (q.data === "") {
-                        // quitamos el spin y evitamos que se bloquee la pantalla sin informacion, noRows
-                        return update(q.data)
-                    }
-                    // pasamos los registros al state para pintarlos en pantalla y quitamos el spin
-                    return setSubmit({
-                        getInfo: false,
-                        toRequest: q.data,
-                        noRows: false
-                    })
-                } catch (error) {
-                    // quitar el spin, evitar que se bloquee la pantalla por no encontrar registros
-                    setSubmit({
-                        getInfo: false,
-                        noRows: true
-                    })
+    const ceroRows = () => {
+        dispatch({
+            type: LISTA_SOLICITUDES_ENCERO,
+        })
+        setTrigger(false);
+    }
 
-                }
-            }
-            get();
-        }
+    // si la API responde con error del token, terminamos la sesion del usuario con un mensaje en pantalla
+    // para que vuelva a iniciar sesion
+
+
+    /**
+     * @gabrielmares
+     * @param form envia los datos del formulario a la API
+     * @param endPoint, es la ruta de la donde se hara la llamada
+     * @param trigger, dispara la llamada a la API desde el boton buscar, en el formulario
+     */
+
+    const { pending, rows, token } = useFetch({ form, trigger, endPoint })
+
+    useEffect(() => {
+        // espera mientras la llamada a la API termina
+        if (pending) return false
+        // cuando encuentra datos, los pasa al reducer quien los pinta en la tabla, se cancela el evento submit
+        // y fetchAPI para las siguientes consultas
+        if (rows) return exitoso(rows)
+        // cuando no encuentra resultados, retorna 0 el hook, el reducer deja un array en blanco en las solicitudes
+        // y cancelamos el trigger y fetchAPI
+        if (rows === 0) return ceroRows()
+        if (!token) return endSession()
         // eslint-disable-next-line
-    }, [FINNOSUCURSAL, getInfo, centro, from, to])
+    }, [pending, rows, trigger])
 
-    // funcion que cierra la sesion de usuario, cuando la tiene activa
-    const reset = () => {
-        return history.push('/')
-    }
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    const handleSubmit = () => {
+        dispatch({
+            type: LLAMADA_API_SOLICITUDES
+        })
         // si el usuario administrador, oficial o gerente puede enviar la solicitud en blanco
         // el resto de usuarios con sucursal asignada, se les rellena el input con el numero de sucursal
         // y se bloquea el campo, evitando revisar sucursales ajenas
-        if (isNaN(FINNOSUCURSAL) || FINNOSUCURSAL === "") return false
-        setSubmit({
-            ...submit,
-            getInfo: true,
-        })
-    }
-
-
-    if (modal) {
-        return (
-            <DangerModal
-                msg={'La sesion ha caducado, vuelva a iniciar sesion'}
-                action={reset}
-                header={'Error de sesion de usuario'}
-                type={'modal-danger'}
-            />
-
-        )
-
-    }
-    // pasa las solicitudes locales, al state global
-    if (requestBySuc.length === 0 && toRequest.length > 0) {
-        setRequestBySuc(toRequest)
-    }
-
-    // pasa las solicitues globales al state local
-    if (requestBySuc.length > 0 && toRequest.length === 0) {
-
-        return setSubmit({
-            getInfo: false,
-            toRequest: requestBySuc,
-            noRows: false
-        })
+        if (info?.rol !== 0 && Sucursal === 0 && info?.sucursal > 0) return false
+        setTrigger(true)
     }
 
 
     return (
-        <Col style={{ marginLeft: '12rem' }} className="animated fadeIn" lg='9' md='12'>
-            <Card style={{ height: '50rem' }}>
+        <Col className="animated fadeIn  mr-auto ml-auto" lg='10' >
+            <Card style={{ height: `${window.innerHeight * 0.049}rem` }}>
                 <CardHeader>
                     <h3 className='text-center'>Solicitudes de credito en Proceso</h3>
                     <br />
                     <InputsFilters
-                        submit={submit} 
-                        setSubmit={setSubmit}
                         handleSubmit={handleSubmit}
                     />
 
                 </CardHeader>
-                {noRows ?
-                    (null)
-                    : (
-                        <TableRequestInProcess
-                            rows={toRequest}
-                            tipoUsuario={info.sucursal}
-                        />
+                {loader && <SpinnerModal mensaje='Descargando...' />}
+                {requests.length > 0 &&
+                    (
+                        <TableRequestInProcess />
                     )
                 }
             </Card>

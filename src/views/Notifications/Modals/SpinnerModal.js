@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal, Spinner } from 'reactstrap';
+import { usuarioContext } from '../../../Context/contextUsers';
 
-const SpinnerModal = ({ modal }) => {
+const SpinnerModal = ({ mensaje }) => {
 
-    setInterval(() => {
-        console.log('modal')
-    }, 3000);
- 
+    const { loader } = useContext(usuarioContext)
+
 
     return (
         <div className="animated fadeIn justify-content-center">
-            <Modal isOpen={modal} size="sm" >
+            <Modal isOpen={loader} size="sm" >
                 <div className="text-center">
                     <Spinner
                         className="text-center"
@@ -19,7 +18,7 @@ const SpinnerModal = ({ modal }) => {
                         type='grow'
                     />
                 </div>
-                <h4 className="text-center">Generando solicitud...</h4>
+                <h4 className="text-center">{mensaje}</h4>
 
             </Modal>
         </div>

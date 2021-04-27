@@ -1,9 +1,10 @@
 import React from 'react';
-import { Nav, Button, Col } from 'reactstrap';
+import { Nav, Button } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import PublicImg from '../../assets/img/brand/public.png'
+import Img from '../../assets/img/brand/grameen_logo.png'
 import { useHistory } from 'react-router-dom';
-import axiosClient from '../../helpers/axiosClient'
+import Row from 'reactstrap/lib/Row';
+import { logOut } from '../../helpers/Helpers';
 
 
 
@@ -16,8 +17,8 @@ const DefaultHeader = ({ usuario }) => {
   // reenviamos a la pantalla principal
   const signOut = async (e) => {
     e.preventDefault()
-    await axiosClient.get('/api/logout');
-    history.push('/'); 
+    logOut()
+    history.push('/entrar');
   }
 
 
@@ -25,7 +26,7 @@ const DefaultHeader = ({ usuario }) => {
     <React.Fragment>
       <AppSidebarToggler className="d-lg-none" display="md" mobile />
       <AppNavbarBrand
-        full={{ src: PublicImg, width: 100, height: 25, alt: 'Grameen' }}
+        full={{ src: Img, width: 100, height: 25, alt: 'Grameen' }}
       />
       <AppSidebarToggler className="d-md-down-none" display="lg" />
       <h2 style={{ paddingLeft: '2rem', marginTop: '10px' }}>{usuario}</h2>
@@ -33,12 +34,12 @@ const DefaultHeader = ({ usuario }) => {
       <Nav className="ml-auto" navbar>
 
       </Nav>
-      <Col col="2" sm="2" md="2" xl="1" className="justify-content-end">
-        <Button style={{ marginLeft: '50px' }} id="LogOut" outline color="danger" onClick={e => signOut(e)}>
+      <Row className="justify-content-end mr-4">
+        <Button id="LogOut" outline color="danger" onClick={e => signOut(e)}>
           <i className="cui-account-logout"></i>&nbsp;
             Salir
           </Button>
-      </Col>
+      </Row>
     </React.Fragment>
   );
 }
