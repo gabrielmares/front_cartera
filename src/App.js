@@ -15,9 +15,8 @@ const Login = React.lazy(() => import('./views/Pages/Login'));
 
 const Fail = React.lazy(() => import('./views/Pages/Page404/Page404'))
 
-
 const App = (props) => {
-
+ 
   return (
 
     <BrowserRouter>

@@ -17,7 +17,7 @@ export default {
 
         // {
         //     name: "Programas",
-        //     url: "/grameen/programas",
+        //     url: "/app/programas",
         //     icon: "icon-share"
         // },
 
@@ -52,12 +52,12 @@ export default {
             // children: [
             //     {
             //         name: 'Futuras',
-            //         url: '/grameen/renovaciones/futuras',
+            //         url: '/app/renovaciones/futuras',
             //         icon: 'icon-star'
             //     },
             // {
             //     name: 'Procesadas',
-            //     url: '/grameen/renovaciones/procesadas',
+            //     url: '/app/renovaciones/procesadas',
             //     icon: 'icon-star'
 
             // },
@@ -65,7 +65,7 @@ export default {
             // },
             // {
             //     name: 'Universidades',
-            //     url: '/grameen/universidades',
+            //     url: '/app/universidades',
             //     icon: 'icon-graduation'
 
         },
@@ -73,15 +73,6 @@ export default {
             divider: true,
             rol: 7
         },
-        {
-            name: 'Usuarios',
-            url: '/grameen/icons',
-            icon: 'cui-people',
-            rol: 0
-        },
-        // {
-        //     divider: true,
-        // },
 
         {
             title: true,
@@ -116,7 +107,7 @@ export default {
         //     children: [
         //         {
         //             name: 'CoreUI Icons',
-        //             url: '/grameen/icons/coreui-icons',
+        //             url: '/app/icons/coreui-icons',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'info',
@@ -125,12 +116,12 @@ export default {
         //         },
         //         {
         //             name: 'Flags',
-        //             url: '/grameen/icons/flags',
+        //             url: '/app/icons/flags',
         //             icon: 'icon-star',
         //         },
         //         {
         //             name: 'Font Awesome',
-        //             url: '/grameen/icons/font-awesome',
+        //             url: '/app/icons/font-awesome',
         //             icon: 'icon-star',
         //             badge: {
         //                 variant: 'secondary',
@@ -139,20 +130,20 @@ export default {
         //         },
         //         {
         //             name: 'Simple Line Icons',
-        //             url: '/grameen/icons/simple-line-icons',
+        //             url: '/app/icons/simple-line-icons',
         //             icon: 'icon-star',
         //         },
         //     ],
         // }
         // {
         //   name: 'Charts',
-        //   url: '/grameen/icons',
+        //   url: '/app/icons',
         //   icon: 'icon-pie-chart',
         // }
         // // },
         // {
         //     name: 'Icons',
-        //     url: '/grameen/iconos',
+        //     url: '/app/iconos',
         //     icon: 'icon-star',
         //     children: [
         //         {
@@ -211,7 +202,7 @@ export default {
         // },
         {
             name: 'Widgets',
-            url: '/grameen/widgets',
+            url: '/app/widgets',
             icon: 'icon-calculator',
             rol: 1
         },

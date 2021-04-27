@@ -5,9 +5,9 @@ import generateDoc from '../../helpers/GeneratorDocs'
 import { usuarioContext } from '../../Context/contextUsers';
 import { QUITAR_LOADER } from '../../Context/types';
 
-const RequestTable = ({ info, hide }) => {
+const RequestTable = () => {
 
-    const { loader, dispatch } = useContext(usuarioContext)
+    const { loader, dispatch, renovations } = useContext(usuarioContext)
 
     const handlePrint = async CODIGO => {
         hide(!loader)
@@ -43,11 +43,11 @@ const RequestTable = ({ info, hide }) => {
                 </thead>
 
                 <tbody className="text-center" >
-                    {info.map((cliente, index) => (
+                    {renovations.map((cliente, index) => (
                         < tr key={index} >
                             <td style={{ width: '18rem', textAlign: 'left' }}>
                                 <b className="linkDoc" onClick={(cliente.PORPAGADO <= 85) ? (null) : (() => handlePrint(cliente.CODIGO))}>
-                                    {cliente.NOMBRE}
+                                    {(cliente.PORPAGADO <= 85) ? ('Cliente aun no puede renovar') : ('Credito renovable')}
                                 </b>
                             </td>
                             <td >{cliente.CENTRO}</td>

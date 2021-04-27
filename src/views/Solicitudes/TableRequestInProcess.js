@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+ import React from 'react'
 import { Table } from 'reactstrap'
 import { usuarioContext } from '../../Context/contextUsers'
 
@@ -59,7 +59,7 @@ const Solicitudes = () => {
                         < tr key={index}>
                             <td style={{ width: '16rem', textAlign: 'left' }}>
                                 <b className="linkDoc" >
-                                    {cliente.nombre}
+                                    Nombre Cliente, ANONIMO
                                 </b>
                             </td>
                             { (info?.rol < 4) && (<td>{cliente.sucursal}</td>)}

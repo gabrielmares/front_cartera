@@ -82,9 +82,7 @@ const Renovacion = () => {
                 )}
                 {renovations.length > 0 &&
                     (
-                        <RequestTable
-                            info={renovations}
-                        />
+                        <RequestTable />
                     )
                 }
             </Card>

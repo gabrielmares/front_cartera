@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Card, CardBody, CardGroup, CardImg, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Button } from 'reactstrap';
 import img from "../Login/grameen.png";
 import PrivateRoute from '../../../containers/Private'
 import { usuarioContext } from '../../../Context/contextUsers';
@@ -122,7 +122,7 @@ const Login = () => {
               </Card>
               <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
-                  <CardImg top width="10%" src={img} alt="Grameen AC" />
+                  <CardImg top width="10%" src={img} alt="Grameen" />
 
                 </CardBody>
               </Card>

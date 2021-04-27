@@ -76,6 +76,8 @@ const Renovacion = () => {
                     <h3 className='text-center'>Solicitudes de credito en Proceso</h3>
                     <br />
                     <InputsFilters
+                        submit={submit} 
+                        setSubmit={setSubmit}
                         handleSubmit={handleSubmit}
                     />
 

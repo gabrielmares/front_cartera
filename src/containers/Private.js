@@ -18,6 +18,7 @@ const PrivateRoute = ({ component: Component }) => {
     //hace una nueva verificacion de identidad
     // useAuth se usa cuando el usuario recarga la app, verifica con el backend
     // la identidad del usuario que tiene abierta la sesion
+
     let { pending, claims } = useAuth(info);
 
 

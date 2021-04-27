@@ -1,10 +1,11 @@
 import React from 'react';
 import { Nav, Button } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/grameen_logo.png';
+import PublicImg from '../../assets/img/brand/public.png'
 import { useHistory } from 'react-router-dom';
 import Row from 'reactstrap/lib/Row';
 import { logOut } from '../../helpers/Helpers';
+
 
 
 const DefaultHeader = ({ usuario }) => {
@@ -25,7 +26,7 @@ const DefaultHeader = ({ usuario }) => {
     <React.Fragment>
       <AppSidebarToggler className="d-lg-none" display="md" mobile />
       <AppNavbarBrand
-        full={{ src: logo, width: 100, height: 25, alt: 'Grameen' }}
+        full={{ src: PublicImg, width: 100, height: 25, alt: 'Grameen' }}
       />
       <AppSidebarToggler className="d-md-down-none" display="lg" />
       <h2 style={{ paddingLeft: '2rem', marginTop: '10px' }}>{usuario}</h2>

@@ -4,7 +4,6 @@ import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { usuarioContext } from '../../Context/contextUsers'
 import {
-  // AppAside,
   AppHeader,
   AppSidebar,
   AppSidebarFooter,
@@ -54,7 +53,7 @@ const DefaultLayout = () => {
             <Suspense fallback={loading()}>
               <Switch>
                 {filterRoutes.map((route, idx) => {
-                  return (route.component /* && (route.rol >= info.rol) */) ? (
+                  return (route.component) && (
                     <Route
                       key={idx}
                       path={route.path}
@@ -63,7 +62,7 @@ const DefaultLayout = () => {
                       render={props => (
                         <route.component {...props} />
                       )} />
-                  ) : (null);
+                  )
                 })}
                 <Redirect to="/inicio" />
               </Switch>

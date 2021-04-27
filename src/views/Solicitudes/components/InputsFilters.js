@@ -4,7 +4,29 @@ import { usuarioContext } from '../../../Context/contextUsers'
 
 const InputFilter = ({ handleSubmit }) => {
 
-    const { info, spin, form, handleForm } = useContext(usuarioContext)
+    // const { toRequest } = submit;
+    const { info, form, setForm, spin } = useContext(usuarioContext)
+ 
+    // variables globales de filtros por sucursales
+    const { Sucursal} = form
+
+    // manejo de los cambios de fechas y centros en la vista
+    const handleChange = e => {
+        Inputdate(e.target.value)
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    if (FINNOSUCURSAL === "") {
+        setForm({
+            ...form,
+            FINNOSUCURSAL: info.sucursal
+        })
+    }
+
+
 
     const { Sucursal, Centro, From, To } = form
 
