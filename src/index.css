@@ -9,7 +9,7 @@
 }
 
 .flex-container {
-    display: flex;
+    display: flex; 
     flex-wrap: wrap;
   }
 
@@ -52,5 +52,4 @@ tbody tr {
 .tablarenovaciones{
   overflow: auto;
   display: block;
-  height: 664px;
 }

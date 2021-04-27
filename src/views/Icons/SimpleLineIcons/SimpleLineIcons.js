@@ -6,7 +6,7 @@ class SimpleLineIcons extends Component {
     return (
       <div className="animated fadeIn">
         <Card>
-          <CardHeader>
+          <CardHeader> 
             <i className="fa fa-picture-o"></i> Simple Line Icons
           </CardHeader>
           <CardBody>

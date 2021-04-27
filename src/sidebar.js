@@ -2,7 +2,7 @@ export default {
     items: [
         {
             name: 'Principal',
-            url: '/grameen/inicio',
+            url: '/inicio',
             icon: "icon-home",
             rol: 7
         },
@@ -40,13 +40,13 @@ export default {
         },
         {
             name: 'Solicitudes',
-            url: '/grameen/solicitudes',
+            url: '/solicitudes',
             icon: 'icon-star',
             rol: 7
         },
         {
             name: "Renovaciones",
-            url: "/grameen/renovaciones",
+            url: "/renovaciones",
             icon: "icon-star",
             rol: 7
             // children: [
@@ -98,13 +98,13 @@ export default {
         },
         {
             name: 'Roles y Usuarios',
-            url: '/grameen/admon/users',
+            url: '/admon/users',
             icon: 'icon-note',
             rol: 1
         },
         {
             name: 'Configuracion',
-            url: '/grameen/admon/configuration',
+            url: 'admon/configuration',
             icon: 'icon-note',
             rol: 1
         },

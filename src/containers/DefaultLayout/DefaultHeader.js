@@ -1,9 +1,10 @@
 import React from 'react';
-import { Nav, Button, Col } from 'reactstrap';
+import { Nav, Button } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/grameen_logo.png';
 import { useHistory } from 'react-router-dom';
-import axiosClient from '../../helpers/axiosClient'
+import Row from 'reactstrap/lib/Row';
+import { logOut } from '../../helpers/Helpers';
 
 
 const DefaultHeader = ({ usuario }) => {
@@ -15,8 +16,8 @@ const DefaultHeader = ({ usuario }) => {
   // reenviamos a la pantalla principal
   const signOut = async (e) => {
     e.preventDefault()
-    await axiosClient.get('/api/logout');
-    history.push('/');
+    logOut()
+    history.push('/entrar');
   }
 
 
@@ -32,12 +33,12 @@ const DefaultHeader = ({ usuario }) => {
       <Nav className="ml-auto" navbar>
 
       </Nav>
-      <Col col="2" sm="2" md="2" xl="1" className="justify-content-end">
-        <Button style={{ marginLeft: '50px' }} id="LogOut" outline color="danger" onClick={e => signOut(e)}>
+      <Row className="justify-content-end mr-4">
+        <Button id="LogOut" outline color="danger" onClick={e => signOut(e)}>
           <i className="cui-account-logout"></i>&nbsp;
             Salir
           </Button>
-      </Col>
+      </Row>
     </React.Fragment>
   );
 }

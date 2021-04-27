@@ -9,7 +9,7 @@ class BrandButtons extends Component {
           <Col xs="12">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i>
+                <i className="fa fa-align-justify"></i> 
                 <strong>Brand Button</strong>
                 <small> Usage ex. </small>
                 <code>

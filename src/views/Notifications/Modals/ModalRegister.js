@@ -5,7 +5,7 @@ import axiosClient from '../../../helpers/axiosClient';
 
 
 const Modals = ({ show, hide }) => {
-    let history = useHistory();
+    let history = useHistory(); 
     const [user, setUser] = React.useState({
         nombre: '',
         email: "",
@@ -42,7 +42,7 @@ const Modals = ({ show, hide }) => {
             }).then(res => {
                 if (res.data) {
                     console.log(res.data)
-                    history.push('/grameen/admon/users')
+                    history.push('/app/admon/users')
                     return hide(false)
                 }
             })

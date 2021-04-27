@@ -5,7 +5,7 @@ class Tables extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <Row>
+        <Row> 
           <Col xs="12" lg="6">
             <Card>
               <CardHeader>

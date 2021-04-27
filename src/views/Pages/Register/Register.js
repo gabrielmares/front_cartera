@@ -5,7 +5,7 @@ class Register extends Component {
   render() {
     return (
       <div className="app flex-row align-items-center">
-        <Container>
+        <Container> 
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">

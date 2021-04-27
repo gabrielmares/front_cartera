@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Progress } from 'reactstrap';
 
 class ProgressBar extends Component {
 
-  render() {
+  render() { 
     return (
       <div className="animated fadeIn">
         <Card>

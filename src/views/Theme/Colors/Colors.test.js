@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import Colors from './Colors';
 import { mount } from 'enzyme'
 

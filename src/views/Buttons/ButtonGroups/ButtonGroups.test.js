@@ -6,7 +6,7 @@ import {mount} from 'enzyme/build';
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<ButtonGroups />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  ReactDOM.unmountComponentAtNode(div); 
 });
 it('toggle click without crashing', () => {
   const wrapper = mount(<ButtonGroups />);
