@@ -32,7 +32,6 @@ const Login = () => {
       type: INICIAR_SESION
     })
     const callAPI = await LoginFn(email, password)
-    console.log(callAPI)
     if (callAPI === 500) {
       dispatch({
         type: FALLO_INICIO_SESION
