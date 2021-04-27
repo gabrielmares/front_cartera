@@ -52,7 +52,7 @@ const RequestTable = () => {
                         < tr key={index} >
                             <td style={{ width: '18rem', textAlign: 'left' }}>
                                 <b className="linkDoc" onClick={(cliente.PORPAGADO <= 85) ? (null) : (() => handlePrint(cliente.CODIGO))}>
-                                    {(cliente.PORPAGADO <= 85) ? ('Cliente aun no puede renovar') : ('Credito renovable')}
+                                    {cliente.NOMBRE} {/* {(cliente.PORPAGADO <= 85) ? ('Cliente aun no puede renovar') : ('Credito renovable')} */}
                                 </b>
                             </td>
                             <td >{cliente.CENTRO}</td>

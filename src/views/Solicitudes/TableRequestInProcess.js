@@ -59,7 +59,7 @@ const Solicitudes = () => {
                         < tr key={index}>
                             <td style={{ width: '16rem', textAlign: 'left' }}>
                                 <b className="linkDoc" >
-                                    Nombre Cliente, ANONIMO
+                                    {cliente.nombre}
                                 </b>
                             </td>
                             { (info?.rol < 4) && (<td>{cliente.sucursal}</td>)}
