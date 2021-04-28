@@ -4,6 +4,7 @@
 /node_modules
 /build
 /public/solicitud.docx
+/public/demoApp.docx
 
 # testing
 /coverage

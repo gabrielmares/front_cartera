@@ -4,13 +4,18 @@ import generateDoc from '../../helpers/GeneratorDocs'
 import { usuarioContext } from '../../Context/contextUsers';
 import { LLAMADA_API, QUITAR_LOADER } from '../../Context/types';
 import axiosClient from '../../helpers/axiosClient';
+import JsonServer from '../../server.json';
+import generateDemo from '../../helpers/DemoApp'
 
 const RequestTable = () => {
 
     const { loader, dispatch, renovations, envApp } = useContext(usuarioContext)
 
     const handlePrint = async CODIGO => {
-        if (envApp) return alert('Funcion deshabilitada en modo DEMO')
+        // if (envApp) return alert('Funcion deshabilitada en modo DEMO')
+        if (envApp) {
+            return await generateDemo(JsonServer.data.renovations.filter(usuario => usuario.CODIGO === CODIGO))
+        }
         dispatch({
             type: LLAMADA_API
         })
@@ -52,7 +57,7 @@ const RequestTable = () => {
                 <tbody className="text-center" >
                     {renovations.map((cliente, index) => (
                         < tr key={index} >
-                            <td style={{ width: '18rem', textAlign: 'left', color: (cliente.PORPAGADO<=85) ? 'gray' : 'black' }}>
+                            <td style={{ width: '18rem', textAlign: 'left', color: (cliente.PORPAGADO <= 85) ? 'gray' : 'black' }}>
                                 <b className="linkDoc" onClick={(cliente.PORPAGADO <= 85) ? (() => alert('El cliente aun no puede renovar su credito')) : (() => handlePrint(cliente.CODIGO))}>
                                     {cliente.NOMBRE}
                                 </b>
