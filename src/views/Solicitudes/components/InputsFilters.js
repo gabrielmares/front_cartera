@@ -4,7 +4,7 @@ import { usuarioContext } from '../../../Context/contextUsers'
 
 const InputFilter = ({ handleSubmit }) => {
 
-    const { info, spin, form, handleForm } = useContext(usuarioContext)
+    const { info, spin, form, handleForm, envApp } = useContext(usuarioContext)
 
     const { Sucursal, Centro, From, To } = form
 
@@ -58,7 +58,7 @@ const InputFilter = ({ handleSubmit }) => {
                     id="from"
                     className="col-2 fechas"
                     value={From}
-                    disabled={spin}
+                    disabled={spin || envApp}
                     onChange={(e) => handleForm(e)}
                 />
                 {/* separador */}
@@ -73,7 +73,7 @@ const InputFilter = ({ handleSubmit }) => {
                     name="To"
                     className="col-2 fechas"
                     value={To}
-                    disabled={spin}
+                    disabled={spin || envApp}
                     onChange={(e) => handleForm(e)}
                 />
                 <Button

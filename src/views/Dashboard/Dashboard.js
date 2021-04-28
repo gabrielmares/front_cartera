@@ -11,12 +11,13 @@ import {
 import axiosClient from '../../helpers/axiosClient';
 import { usuarioContext } from '../../Context/contextUsers';
 import { LISTA_DE_RENOVACIONES_EXITOSO, LISTA_SOLICITUDES_EXITOSO } from '../../Context/types';
+import JsonServer from '../../server.json'
 
 
 
 const Dashboard = () => {
   let history = useHistory();
-  const { info, dispatch } = React.useContext(usuarioContext)
+  const { info, dispatch, envApp } = React.useContext(usuarioContext)
   // se filtra la respuesta de la api por sucursal y se almacena en su propio state
   const [obregon, setObregon] = React.useState({
     renovations: [],
@@ -32,7 +33,7 @@ const Dashboard = () => {
   })
 
   const filtrarSucursales = (totales) => {
-    switch (info.sucursal) {
+    switch (parseInt(info.sucursal)) {
       case 0:
         setObregon({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
@@ -74,6 +75,10 @@ const Dashboard = () => {
   // con solicitudes y renovaciones por sucursal
   const [loading, setLoading] = React.useState(true)
   React.useEffect(() => {
+    if (envApp) {
+      filtrarSucursales(JsonServer)
+      return setLoading(false)
+    }
     axiosClient.get('/api/operaciones/totales', {
       params: {
         sucursal: info.sucursal
@@ -166,7 +171,7 @@ const Dashboard = () => {
               </NavLink>
             </CardBody>
           </Card>
-        </Col>) : (null) }
+        </Col>) : (null)}
 
 
       </Row>

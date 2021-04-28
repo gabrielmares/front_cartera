@@ -13,6 +13,17 @@ export const useAuth = (data) => {
     //si se actualiza la pagina, hace la llamada al backend con las credenciales en la cabecera
     // de la peticion, si el token esta vencido, se recibe un codigo 403
     useEffect(() => {
+        if (process.env.REACT_APP_JSON === 'TRUE' && window.localStorage.getItem('Demo')) {
+            return setGet({
+                pending: false,
+                claims: {
+                    sucursal: parseInt(process.env.REACT_APP_SUCURSAL),
+                    rol: parseInt(process.env.REACT_APP_ROL),
+                    nombre: process.env.REACT_APP_NOMBRE,
+                    email: process.env.REACT_APP_EMAIL
+                }
+            })
+        }
         if (data) return setGet({
             claims: data,
             pending: false

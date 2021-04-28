@@ -18,7 +18,6 @@ const UsersContext = (props) => {
 
     const [state, dispatch] = useReducer(sessionReducer, initialState)
 
-
     let [form, setForm] = useState({
         Sucursal: 0,
         Centro: 0,
@@ -35,16 +34,17 @@ const UsersContext = (props) => {
     }
 
     if (state.err) return <ModalLogOut />
-    
+
     const endSession = () => {
         dispatch({
             type: CERRAR_SESION
         })
     }
-
+    const envApp = Boolean(process.env.REACT_APP_JSON === 'TRUE')
     return (
         <usuarioContext.Provider
             value={{
+                envApp,
                 info: state.claims,
                 form,
                 requests: state.requests,
@@ -52,7 +52,8 @@ const UsersContext = (props) => {
                 renovations: state.renovations,
                 dispatch,
                 handleForm,
-                endSession
+                endSession,
+
             }}
         >
             {props.children}

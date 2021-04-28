@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axiosClient from '../helpers/axiosClient'
 import { CambiarFecha, sumaFechas } from '../helpers/Helpers'
-
+import Api from '../api'
 
 const useFetch = ({ form, trigger, endPoint }) => {
 
@@ -13,6 +13,11 @@ const useFetch = ({ form, trigger, endPoint }) => {
     useEffect(() => {
         if (trigger) {
             const get = async () => {
+                if (process.env.REACT_APP_JSON === 'TRUE' && window.localStorage.getItem('Demo')) {
+                    const localQuery = Api({ form, endPoint })
+                    setRows(localQuery);
+                    return setPending(false);
+                }
                 let q = await axiosClient.get(`/api/operaciones/${endPoint}`, {
                     params: {
                         FINNOSUCURSAL: Sucursal,
