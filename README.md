@@ -5,7 +5,7 @@
 - Pantalla con desglose de informacion importante de cada [sucursal](https://github.com/gabrielmares/front_cartera/blob/main/src/views/Dashboard/Dashboard.js "sucursal") de operacion
 
 
-###Links
+### Links
 
 Puedes probar la aplicacion Demo en el siguiente [enlace](https://demo-renovaciones.netlify.app/ "enlace").
 
@@ -20,7 +20,7 @@ En la version Demo se usa un JSON como base de datos, de donde la app recoge los
 
 Con [mockaroo](https://www.mockaroo.com/ "mockaro") generamos la base de datos para el DEMO.
 
-##Renovacion del credito
+## Renovacion del credito
 
 - El nombre del cliente aparece en gris, cuando no puede aplicar para una renovacion
 - Los clientes con el nombre en color normal, son los creditos renovables
