@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { CardHeader, Col, Card } from 'reactstrap';
 import TableRequestInProcess from './TableRequestInProcess';
 import { usuarioContext } from '../../Context/contextUsers'
@@ -6,7 +6,6 @@ import InputsFilters from './components/InputsFilters'
 import { LISTA_SOLICITUDES_ENCERO, LISTA_SOLICITUDES_EXITOSO, LLAMADA_API_SOLICITUDES } from '../../Context/types';
 import SpinnerModal from '../Notifications/Modals/SpinnerModal';
 import useFetch from '../../hook/useFetch';
-import { useEffect } from 'react/cjs/react.development';
 
 const Renovacion = () => {
 

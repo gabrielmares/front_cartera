@@ -5,15 +5,18 @@ import { usuarioContext } from '../../Context/contextUsers'
 
 const Solicitudes = () => {
 
-    const { info, requests } = useContext(usuarioContext)
+    const { info, requests, envApp } = useContext(usuarioContext)
 
     // funcion que vuelve legible al usuario el plazo de las solicitudes de credito
     let plazo = (amortizaciones) => {
         switch (amortizaciones) {
+            case 1:
             case 13:
                 return '6 Meses'
+            case 2:
             case 26:
                 return '1 año'
+            case 3:
             case 39:
                 return ' 18 Meses'
             default:
@@ -48,7 +51,7 @@ const Solicitudes = () => {
                         {(info?.rol < 4) && (<th >Sucursal</th>)}
                         <th >Centro</th>
                         <th >Grupo</th>
-                        <th >Solicitado</th>
+                        <th >Solicita</th>
                         <th style={{ width: '6.5em' }} > Plazo </th>
                         <th style={{ width: '9.5em', textAlign: 'right' }} >Documentacion</th>
                     </tr>
@@ -58,14 +61,16 @@ const Solicitudes = () => {
                     {requests.map((cliente, index) => (
                         < tr key={index}>
                             <td style={{ width: '16rem', textAlign: 'left' }}>
-                                <b className="linkDoc" >
+                                <b
+                                    className="linkDoc"
+                                    onClick={() => alert('Esta pantalla es para el seguimiento de solicitudes, el avance de cada solicitud de credito en tramite esta en la columna Documentacion')}>
                                     {cliente.nombre}
                                 </b>
                             </td>
                             { (info?.rol < 4) && (<td>{cliente.sucursal}</td>)}
                             <td >{cliente.centro}</td>
                             <td >{cliente.grupo}</td>
-                            <td >{cliente.montosol}</td>
+                            <td >{envApp ? (Math.trunc(cliente.montosol / 1000) * 1000) : (cliente.montosol)}</td>
                             <td style={{ width: '6.5em' }} >{plazo(parseInt(cliente.plazo))}</td>
                             <td style={{ width: '9.5em' }}>{docs([cliente.solicitud, cliente.comprobante, cliente.ine, cliente.aviso])}%</td>
                         </tr>

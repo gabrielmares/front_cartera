@@ -200,12 +200,12 @@ export default {
         //     },
         //   ],
         // },
-        {
-            name: 'Widgets',
-            url: '/app/widgets',
-            icon: 'icon-calculator',
-            rol: 1
-        },
+        // {
+        //     name: 'Widgets',
+        //     url: '/app/widgets',
+        //     icon: 'icon-calculator',
+        //     rol: 1
+        // },
 
     ],
 };

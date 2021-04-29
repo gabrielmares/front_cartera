@@ -4,7 +4,7 @@ import { usuarioContext } from '../../../Context/contextUsers'
 
 const InputFilter = ({ handleSubmit }) => {
 
-    const { info, spin, form, handleForm } = useContext(usuarioContext)
+    const { info, spin, form, handleForm, envApp } = useContext(usuarioContext)
 
     const { Sucursal, Centro, From, To } = form
 
@@ -26,10 +26,10 @@ const InputFilter = ({ handleSubmit }) => {
                     onChange={(e) => handleForm(e)}
                     disabled={(spin || (info.sucursal > 0))}
                 >
-                    <option value={0}></option>
-                    <option value={1}>Obregon</option>
-                    <option value={2}>Huatabampo</option>
-                    <option value={3}>Navojoa</option>
+                    <option value={0}>Mostrar todo</option>
+                    <option value={1}>{(envApp) ? 'Sucursal 1' : process.env.REACT_APP_SUCURSAL1}</option>
+                    <option value={2}>{(envApp) ? 'Sucursal 2' : process.env.REACT_APP_SUCURSAL2}</option>
+                    <option value={3}>{(envApp) ? 'Sucursal 3' : process.env.REACT_APP_SUCURSAL3}</option>
                 </CustomInput>
                 {/* separador */}
                 <Label
@@ -58,7 +58,7 @@ const InputFilter = ({ handleSubmit }) => {
                     id="from"
                     className="col-2 fechas"
                     value={From}
-                    disabled={spin}
+                    disabled={spin || envApp}
                     onChange={(e) => handleForm(e)}
                 />
                 {/* separador */}
@@ -73,7 +73,7 @@ const InputFilter = ({ handleSubmit }) => {
                     name="To"
                     className="col-2 fechas"
                     value={To}
-                    disabled={spin}
+                    disabled={spin || envApp}
                     onChange={(e) => handleForm(e)}
                 />
                 <Button
@@ -84,7 +84,7 @@ const InputFilter = ({ handleSubmit }) => {
                     onClick={() => handleSubmit()}
                 >Buscar</Button>
             </Row >
-            
+
         </Form>
 
     );

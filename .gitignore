@@ -4,6 +4,7 @@
 /node_modules
 /build
 /public/solicitud.docx
+/public/demoApp.docx
 
 # testing
 /coverage
@@ -25,4 +26,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .htaccess
-server.json
+/public/_redirects

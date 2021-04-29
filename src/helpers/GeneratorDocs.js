@@ -3,9 +3,19 @@ import { ParseDate } from './Helpers'
 
 // siguiendo el ejemplo de la libreria easy-template-x 
 async function generateDoc(cliente) {
-    const { edoResidencia: { EDORESIDENCIA }, munResidencia: { MUNRESIDENCIA }, pobResidencia: { POBRESIDENCIA },
-        generales, familiar, ColResidencia: { COLRESIDENCIA }, nacestado: { EDONACIMIENTO }, actividad, credito: { MONTO }, vendedor } = cliente;
-    const { CODIGO, NOMBRE, NOMBRES, PATERNO, MATERNO, RFC, CURP, TELEFONO, DOMICILIO, CODPOS, FINCENTRO, FINGRUPO, FECNAC, NOIFE } = generales
+    const {
+        edoResidencia: { EDORESIDENCIA },
+        munResidencia: { MUNRESIDENCIA },
+        pobResidencia: { POBRESIDENCIA },
+        credito: { MONTO },
+        ColResidencia: { COLRESIDENCIA },
+        nacestado: { EDONACIMIENTO },
+        actividad,
+        generales,
+        familiar,
+        vendedor
+    } = cliente;
+    const { CODIGO, NOMBRE, NOMBRES, PATERNO, MATERNO, RFC, CURP, TELEFONO, DOMICILIO, CODPOS, FICENTROO, FINGRUPO, FECNAC, NOIFE } = generales
     let data = {
         CODIGO,
         NOMBRE,
@@ -17,7 +27,7 @@ async function generateDoc(cliente) {
         TELEFONO,
         DOMICILIO,
         CODPOS,
-        FINCENTRO,
+        FICENTROO,
         FINGRUPO,
         ULTIMOCREDITO: MONTO,
         FecNac: ParseDate(FECNAC),

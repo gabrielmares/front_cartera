@@ -23,7 +23,7 @@ const App = (props) => {
       <UsersContext>
         <React.Suspense fallback={loading()}>
           <Switch>
-            <Route exact path="/entrar" name="Login Page" component={Login} />
+            <Route exact path="/" name="Login Page" component={Login} />
             <Route>
               <PrivateRoute path="/inicio" name="Home" component={DefaultLayout} />
               <Route exact path='/error' name='404' component={Fail} />

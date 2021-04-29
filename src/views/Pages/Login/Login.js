@@ -7,13 +7,13 @@ import { usuarioContext } from '../../../Context/contextUsers';
 import SpinnerModal from '../../Notifications/Modals/SpinnerModal';
 import { FALLO_INICIO_SESION, INICIAR_SESION, INICIO_SESION_EXITOSO } from '../../../Context/types';
 import { LoginFn } from '../../../helpers/LoginFn';
-
+import logoPublico from './public.png'
 const DefaultLayout = React.lazy(() => import('../../../containers/DefaultLayout'));
 
 const Login = () => {
   let history = useHistory();
 
-  let { loader, dispatch } = useContext(usuarioContext)
+  let { loader, dispatch, envApp } = useContext(usuarioContext)
   const [errEmail, setErrEmail] = useState(false)
   const [errPassword, setErrPassword] = useState(false)
   const [user, saveuser] = useState({
@@ -23,10 +23,30 @@ const Login = () => {
 
 
   const { email, password } = user;
-
+  const routeMain = () => {
+    history.push('/inicio')
+    return <PrivateRoute path="/inicio" name='Home' component={<DefaultLayout />} />
+  }
   const IniciarSesion = async () => {
     setErrEmail(false)
     setErrPassword(false)
+    if (envApp) {
+      if (email === process.env.REACT_APP_EMAIL && password === process.env.REACT_APP_PASSWORD) {
+        window.localStorage.setItem('Demo', true)
+        const publicClaims = {
+          sucursal: parseInt(process.env.REACT_APP_SUCURSAL),
+          rol: parseInt(process.env.REACT_APP_ROL),
+          nombre: process.env.REACT_APP_NOMBRE,
+          email
+        }
+        dispatch({
+          type: INICIO_SESION_EXITOSO,
+          payload: publicClaims
+        })
+        return routeMain()
+      }
+      return alert('Usuario Incorrecto')
+    }
     dispatch({
       type: INICIAR_SESION
     })
@@ -43,15 +63,15 @@ const Login = () => {
       })
       setErrEmail(true)
     }
-
     if (callAPI?.email) {
       dispatch({
         type: INICIO_SESION_EXITOSO,
         payload: callAPI
       })
-      history.push('/inicio')
-      return <PrivateRoute path="/inicio" name='Home' component={<DefaultLayout />} />
+      routeMain()
     }
+
+
 
     dispatch({
       type: FALLO_INICIO_SESION
@@ -121,7 +141,7 @@ const Login = () => {
               </Card>
               <Card className="text-white d-md-down-none" style={{ width: '44%' }}>
                 <CardBody className="text-center">
-                  <CardImg top width="10%" src={img} alt="Grameen" />
+                  <CardImg top width="10%" src={envApp ? logoPublico : img} alt="LogoEmpresa" />
 
                 </CardBody>
               </Card>
