@@ -19,11 +19,11 @@ const DefaultHeader = ({ usuario }) => {
     e.preventDefault()
     if (process.env.REACT_APP_JSON === 'TRUE' && window.localStorage.getItem('Demo')) {
       window.localStorage.removeItem('Demo');
-      return history.push('/entrar')
+      return history.push('/')
     }
 
     logOut()
-    history.push('/entrar');
+    history.push('/');
   }
 
   const logoApp = (process.env.REACT_APP_JSON === 'TRUE' && window.localStorage.getItem('Demo')) ? logoPublico : logoGrameen

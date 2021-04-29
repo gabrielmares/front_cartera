@@ -19,15 +19,15 @@ const Dashboard = () => {
   let history = useHistory();
   const { info, dispatch, envApp } = React.useContext(usuarioContext)
   // se filtra la respuesta de la api por sucursal y se almacena en su propio state
-  const [obregon, setObregon] = React.useState({
+  const [sucursal1, setSucursal1] = React.useState({
     renovations: [],
     requests: []
   })
-  const [huatabampo, setHuatabampo] = React.useState({
+  const [sucursal2, setSucursal2] = React.useState({
     renovations: [],
     requests: []
   })
-  const [navojoa, setNavojoa] = React.useState({
+  const [sucursal3, setSucursal3] = React.useState({
     renovations: [],
     requests: []
   })
@@ -35,33 +35,33 @@ const Dashboard = () => {
   const filtrarSucursales = (totales) => {
     switch (parseInt(info.sucursal)) {
       case 0:
-        setObregon({
+        setSucursal1({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
         })
-        setHuatabampo({
+        setSucursal2({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
         })
-        setNavojoa({
+        setSucursal3({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
         })
         break;
       case 1:
-        setObregon({
+        setSucursal1({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 1)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 1))
         })
         break;
       case 2:
-        setHuatabampo({
+        setSucursal2({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 2)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 2))
         })
         break;
       case 3:
-        setNavojoa({
+        setSucursal3({
           renovations: totales.data.renovations.filter(invoice => (parseInt(invoice.FINNOSUCURSAL) === 3)),
           requests: totales.data.requests.filter(invoice => (parseInt(invoice.sucursal) === 3))
         })
@@ -119,15 +119,15 @@ const Dashboard = () => {
         {(info.sucursal === 1 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3">
           <Card className="text-white bg-primary " >
             <CardBody>
-              <h4>Obregon</h4>
-              <NavLink onClick={() => renovationsTo(obregon.renovations)} style={{ cursor: 'pointer' }} >
+              <h4>{(envApp) ? 'Sucursal 1' : process.env.REACT_APP_SUCURSAL1}</h4>
+              <NavLink onClick={() => renovationsTo(sucursal1.renovations)} style={{ cursor: 'pointer' }} >
                 <div className="text-value" >
-                  <div>{obregon.renovations.length}</div> <h6>Creditos por renovar </h6>
+                  <div>{sucursal1.renovations.length}</div> <h6>Creditos por renovar </h6>
                 </div>
               </NavLink>
-              <NavLink onClick={() => requestsTo(obregon.requests)} style={{ cursor: 'pointer' }}>
+              <NavLink onClick={() => requestsTo(sucursal1.requests)} style={{ cursor: 'pointer' }}>
                 <div className="text-value" >
-                  <div>{obregon.requests.length}</div> <h6>Solicitudes en proceso</h6>
+                  <div>{sucursal1.requests.length}</div> <h6>Solicitudes en proceso</h6>
                 </div>
               </NavLink>
             </CardBody>
@@ -138,15 +138,15 @@ const Dashboard = () => {
         {(info.sucursal === 2 || info.sucursal === 0) ? (<Col xs="12" sm="6" lg="3" >
           <Card className="text-white bg-success">
             <CardBody>
-              <h4>Huatabampo</h4>
-              <NavLink onClick={() => renovationsTo(huatabampo.renovations)} style={{ cursor: 'pointer' }} >
+              <h4>{(envApp) ? 'Sucursal 2' : process.env.REACT_APP_SUCURSAL2}</h4>
+              <NavLink onClick={() => renovationsTo(sucursal2.renovations)} style={{ cursor: 'pointer' }} >
                 <div className="text-value" >
-                  <div>{huatabampo.renovations.length}</div> <h6>Creditos por renovar </h6>
+                  <div>{sucursal2.renovations.length}</div> <h6>Creditos por renovar </h6>
                 </div>
               </NavLink>
-              <NavLink onClick={() => requestsTo(huatabampo.requests)} style={{ cursor: 'pointer' }}>
+              <NavLink onClick={() => requestsTo(sucursal2.requests)} style={{ cursor: 'pointer' }}>
                 <div className="text-value" >
-                  <div>{huatabampo.requests.length}</div> <h6>Solicitudes en proceso</h6>
+                  <div>{sucursal2.requests.length}</div> <h6>Solicitudes en proceso</h6>
                 </div>
               </NavLink>
             </CardBody>
@@ -158,15 +158,15 @@ const Dashboard = () => {
 
           <Card className="text-white bg-info">
             <CardBody>
-              <h4>Navojoa</h4>
-              <NavLink onClick={() => renovationsTo(navojoa.renovations)} style={{ cursor: 'pointer' }} >
+              <h4>{(envApp) ? 'Sucursal 3' : process.env.REACT_APP_SUCURSAL3}</h4>
+              <NavLink onClick={() => renovationsTo(sucursal3.renovations)} style={{ cursor: 'pointer' }} >
                 <div className="text-value" >
-                  <div>{navojoa.renovations.length}</div> <h6>Creditos por renovar </h6>
+                  <div>{sucursal3.renovations.length}</div> <h6>Creditos por renovar </h6>
                 </div>
               </NavLink>
-              <NavLink onClick={() => requestsTo(navojoa.requests)} style={{ cursor: 'pointer' }}>
+              <NavLink onClick={() => requestsTo(sucursal3.requests)} style={{ cursor: 'pointer' }}>
                 <div className="text-value" >
-                  <div>{navojoa.requests.length}</div> <h6>Solicitudes en proceso</h6>
+                  <div>{sucursal3.requests.length}</div> <h6>Solicitudes en proceso</h6>
                 </div>
               </NavLink>
             </CardBody>

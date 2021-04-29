@@ -26,10 +26,10 @@ const InputFilter = ({ handleSubmit }) => {
                     onChange={(e) => handleForm(e)}
                     disabled={(spin || (info.sucursal > 0))}
                 >
-                    <option value={0}></option>
-                    <option value={1}>Obregon</option>
-                    <option value={2}>Huatabampo</option>
-                    <option value={3}>Navojoa</option>
+                    <option value={0}>Mostrar todo</option>
+                    <option value={1}>{(envApp) ? 'Sucursal 1' : process.env.REACT_APP_SUCURSAL1}</option>
+                    <option value={2}>{(envApp) ? 'Sucursal 2' : process.env.REACT_APP_SUCURSAL2}</option>
+                    <option value={3}>{(envApp) ? 'Sucursal 3' : process.env.REACT_APP_SUCURSAL3}</option>
                 </CustomInput>
                 {/* separador */}
                 <Label
@@ -84,7 +84,7 @@ const InputFilter = ({ handleSubmit }) => {
                     onClick={() => handleSubmit()}
                 >Buscar</Button>
             </Row >
-            
+
         </Form>
 
     );

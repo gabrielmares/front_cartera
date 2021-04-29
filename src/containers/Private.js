@@ -34,7 +34,7 @@ const PrivateRoute = ({ component: Component }) => {
     // cuando la sesion caduco o el token no es valido el servidor retorna
     // el msg 403, sirve de indicacion a la app para reenviar al usuario
     // a iniciar sesion de nuevo
-    if (claims === 403) return <Redirect to="/entrar" component={Login} />
+    if (claims === 403) return <Redirect to="/" component={Login} />
     //si fallo la conexion con el backend, reenviamos a la pagina de error
     if (claims === 412) return <Redirect to="/error" component={Page404} />
 
