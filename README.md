@@ -28,7 +28,7 @@ Con [mockaroo](https://www.mockaroo.com/ "mockaro") generamos la base de datos p
 ##  Principales dependencias
 
 - [BackEnd](https://github.com/gabrielmares/semaforo_backend "BackEnd")
-- [React](npmjs.com/package/react "React") con hooks, useContext, useState, useEffect, useReducer y algunos hooks personalizados para el manejo de la sesion de usuario y peticiones al backEnd.
+- [React](https://www.npmjs.com/package/react "React") con hooks, useContext, useState, useEffect, useReducer y algunos hooks personalizados para el manejo de la sesion de usuario y peticiones al backEnd.
 - [Reacstrap](https://reactstrap.github.io/ "Reacstrap")
 - [Axios](https://github.com/axios/axios "Axios")
 - [CoreUI](https://coreui.io/react/ui-components/  "CoreUI")
